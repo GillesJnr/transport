@@ -1,0 +1,10 @@
+.mdc-drawer .mdc-drawer__content .mdc-drawer-menu .mdc-drawer-item 
+.mdc-expansion-panel-link, .mdc-drawer .mdc-drawer__content 
+.mdc-drawer-menu .mdc-drawer-item .mdc-drawer-link{
+    height: 30px !important; 
+    padding: 0 -0.25rem !important;
+}
+
+.mdc-list-group {
+    margin-left: -1.5rem !important;
+}
