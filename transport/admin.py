@@ -14,11 +14,11 @@ class AllocationAdmin(admin.ModelAdmin):
 class ApiSettingsAdmin(admin.ModelAdmin):
     list_display = ('key_name', 'key_value')
 
-class AuthPermissionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'content_type_id')
+# class AuthPermissionAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'content_type_id')
 
-class AuthUserAdmin(admin.ModelAdmin):
-    list_display = ('username','password','last_login','email', 'first_name','last_name','is_staff', 'date_joined')
+# class AuthUserAdmin(admin.ModelAdmin):
+#     list_display = ('username','password','last_login','email', 'first_name','last_name','is_staff', 'date_joined')
 
 class BookingIncomeAdmin(admin.ModelAdmin):
     list_display = ('booking_id', 'income_id', 'created_at')
@@ -95,8 +95,8 @@ class VendorsAdmin(admin.ModelAdmin):
 admin.site.register(Addresses, AddressAdmin)
 admin.site.register(Allocation, AllocationAdmin)
 admin.site.register(ApiSettings, ApiSettingsAdmin)
-admin.site.register(AuthPermission, AuthPermissionAdmin)
-admin.site.register(AuthUser, AuthUserAdmin)
+# admin.site.register(AuthPermission, AuthPermissionAdmin)
+# admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(BookingIncome, BookingIncomeAdmin)
 admin.site.register(Bookings, BookingsAdmin)
 admin.site.register(BookingsMeta, BookingsMetaAdmin)

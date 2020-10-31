@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 # Create your models here.
 # This is an auto-generated Django model module.
@@ -59,102 +62,7 @@ class ApiSettings(models.Model):
         return self.key_name
 
 
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=80)
 
-    class Meta:
-        managed = True
-        db_table = 'auth_group'
-        verbose_name = "AuthGroup"
-        verbose_name_plural = "AuthGroups"
-
-    def __str__(self):
-        return self.name
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = True
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-        verbose_name = "Auth_Permission"
-        verbose_name_plural = "Auth_Permissions"
-
-    def __str__(self):
-        return self.name
-
-
-class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = True
-        db_table = 'auth_group_permission'
-        unique_together = (('group', 'permission'),)
-        verbose_name = "Auth_group_permission"
-        verbose_name_plural = "Auth_group_permissions"
-
-    def __str__(self):
-        return self.group
-
-
-
-
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = True
-        db_table = 'auth_user'
-        verbose_name = "Auth User"
-        verbose_name_plural = "Auth Users"
-
-    def __str__(self):
-        return self.username
-
-
-class AuthUserGroups(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = True
-        db_table = 'auth_user_group'
-        unique_together = (('user', 'group'),)
-        verbose_name = "Auth User Group"
-        verbose_name_plural = "Auth User Groups"
-
-    def __str__(self):
-        return self.user
-
-
-class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = True
-        db_table = 'auth_user_user_permission'
-        unique_together = (('user', 'permission'),)
-        verbose_name = "Auth User User Permission"
-        verbose_name_plural = "Auth User User Permissions"
-
-    def __str__(self):
-        return self.user
 
 
 class BookingIncome(models.Model):
@@ -216,48 +124,48 @@ class BookingsMeta(models.Model):
         return self.key
 
 
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+# class DjangoAdminLog(models.Model):
+#     action_time = models.DateTimeField()
+#     object_id = models.TextField(blank=True, null=True)
+#     object_repr = models.CharField(max_length=200)
+#     action_flag = models.PositiveSmallIntegerField()
+#     change_message = models.TextField()
+#     content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+#     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
-    class Meta:
-        managed = True
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = True
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
+#     class Meta:
+#         managed = True
+#         db_table = 'django_admin_log'
 
 
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
+# class DjangoContentType(models.Model):
+#     app_label = models.CharField(max_length=100)
+#     model = models.CharField(max_length=100)
 
-    class Meta:
-        managed = True
-        db_table = 'django_migrations'
+#     class Meta:
+#         managed = True
+#         db_table = 'django_content_type'
+#         unique_together = (('app_label', 'model'),)
 
 
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
+# class DjangoMigrations(models.Model):
+#     app = models.CharField(max_length=255)
+#     name = models.CharField(max_length=255)
+#     applied = models.DateTimeField()
 
-    class Meta:
-        managed = True
-        db_table = 'django_session'
+#     class Meta:
+#         managed = True
+#         db_table = 'django_migrations'
+
+
+# class DjangoSession(models.Model):
+#     session_key = models.CharField(primary_key=True, max_length=40)
+#     session_data = models.TextField()
+#     expire_date = models.DateTimeField()
+
+#     class Meta:
+#         managed = True
+#         db_table = 'django_session'
 
 
 class DriverVehicle(models.Model):
@@ -599,15 +507,16 @@ class Settings(models.Model):
 
 class Users(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
-    email = models.CharField(unique=True, max_length=255, blank=True, null=True)
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=255, blank=True, null=True)
     user_type = models.CharField(max_length=255, blank=True, null=True)
     group_id = models.IntegerField(blank=True, null=True)
     api_token = models.CharField(unique=True, max_length=60)
     remember_token = models.CharField(max_length=100, blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
+    updated_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
+    deleted_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
+
 
     class Meta:
         managed = True

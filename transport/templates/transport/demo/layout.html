@@ -40,8 +40,8 @@
       </div>
       <div class="mdc-drawer__content">
         <div class="user-info">
-          <p class="name">Gabriel Gilles</p>
-          <p class="email">ggilles@cagl.com</p>
+          <p class="name">{{ request.user.username }}</p>
+          <p class="email">{{ request.user.email }}</p>
         </div>
         <div class="mdc-list-group">
           <nav class="mdc-list mdc-drawer-menu">
@@ -422,7 +422,7 @@
                   <span class="figure">
                     <img src="{% static 'assets/images/faces/face1.jpg' %}" alt="user" class="user">
                   </span>
-                  <span class="user-name">Gabriel Gilles</span>
+                  <span class="user-name">{{ request.user }}</span>
                 </span>
               </button>
               <div class="mdc-menu mdc-menu-surface" tabindex="-1">
@@ -440,7 +440,9 @@
                       <i class="mdi mdi-settings-outline text-primary"></i>                      
                     </div>
                     <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                      <h6 class="item-subject font-weight-normal">Logout</h6>
+                      <h6 class="item-subject font-weight-normal">
+                        <a href="{% url 'logout' %}">Logout</a>  
+                      </h6>
                     </div>
                   </li>
                 </ul>
@@ -577,7 +579,9 @@
                       <i class="mdi mdi-logout-variant text-primary"></i>                      
                     </div>
                     <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                      <h6 class="item-subject font-weight-normal">Logout</h6>
+                      <h6 class="item-subject font-weight-normal">
+                        <a href="{% url 'logout' %}">Logout</a>  
+                      </h6>
                     </div>
                   </li>
                 </ul>
