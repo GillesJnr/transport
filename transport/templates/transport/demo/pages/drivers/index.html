@@ -8,15 +8,13 @@ right: 0;
 }
 </style>
 {% endblock %}
-<!-- @section("breadcrumb")
-<li class="active">@lang('fleet.customers')</li>
-@endsection -->
+
 {% block content %}
     <div class="row mdc-layout-grid__cell">
         <div class="col-12 col-md-12">
           <div class="box box-primary">
                 <div class="box-header with-border container">
-                    <h3 style="float:left" class="box-title float-left">Manage Customers</h3>
+                    <h3 style="float:left" class="box-title float-left">Manage Drivers</h3>
                     <a href="#" class="btn btn-primary btn-sm float-right">Add New</a>
                   </div>
         </div>
@@ -35,6 +33,7 @@ right: 0;
               <th class="text-left">Email Address</th>
               <th class="text-left">Phone Number</th>
               <th class="text-left">Address</th>
+              <th class="text-left">Created at</th>
               <th class="text-left">Action</th>
             </tr>
           </thead>
@@ -46,12 +45,12 @@ right: 0;
               <td class="text-left">{{ row.email}}</td>
               <td class="text-left">{{ row.phone_number}}</td>
               <td class="text-left">{{ row.address}}</td>
-              
+              <td class="text-left">{{ row.created_at|date:"D, d M, Y"}}</td>
               <td class="text-left">
                 <div class="btn-group">
 
                   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="glyphicon glyphicon-settings"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu custom" role="menu">

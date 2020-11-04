@@ -46,15 +46,11 @@
         <div class="mdc-list-group">
           <nav class="mdc-list mdc-drawer-menu">
             <div class="mdc-list-item mdc-drawer-item">
+              
+
               <a class="mdc-drawer-link" href="{% url 'home' %}">
                 <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">home</i>
                 Dashboard
-              </a>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-drawer-link" href="pages/forms/basic-forms.html">
-                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">groups</i>
-                Users
               </a>
             </div>
 
@@ -67,13 +63,13 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="{% url 'adduser' %}">
+                    <a class="mdc-drawer-link" href="{% url 'view_drivers' %}">
                     <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">person_add</i>
                       Drivers
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
+                    <a class="mdc-drawer-link" href="{% url 'view_users' %}">
                       <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">group</i>
                       Users
                     </a>
@@ -402,7 +398,7 @@
         <div class="mdc-top-app-bar__row">
           <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button sidebar-toggler">menu</button>
-            <span class="mdc-top-app-bar__title">Greetings Gilles!</span>
+            <span class="mdc-top-app-bar__title">Greetings {{ request.user.first_name }}!</span>
             <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon search-text-field d-none d-md-flex">
               <i class="material-icons mdc-text-field__icon">search</i>
               <input class="mdc-text-field__input" id="text-field-hero-input">
@@ -602,7 +598,7 @@
               <div class="mdc-card info-card info-card--success">
                 <div class="card-inner">
                   <h5 class="card-title">Borrowed</h5>
-                  <h5 class="font-weight-light pb-2 mb-1 border-bottom">$62,0076.00</h5>
+                  <h5 class="font-weight-light pb-2 mb-1 border-bottom">{{ income }}</h5>
                   <p class="tx-12 text-muted">48% target reached</p>
                   <div class="card-icon-wrapper">
                     <i class="material-icons">dvr</i>
@@ -869,14 +865,13 @@
 
 
 
-
-<footer>
+  <footer>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
-          <span class="tx-14">Copyright © 2020 <a style="color:blue;" href="https://www.apavone.com/" target="_blank">aPavone Concepts</a>. All rights reserved.</span>
+        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8-desktop">
+          <span style="margin-left:250px;" class="tx-14">Copyright © 2020 <a style="color:blue;" href="https://www.apavone.com/" target="_blank">aPavone Concepts</a>. All rights reserved.</span>
         </div>
-        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop d-flex justify-content-end">
+        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4-desktop d-flex justify-content-end">
           <div class="d-flex align-items-center">
             <a href="">Documentation</a>
             <span class="vertical-divider"></span>
@@ -886,6 +881,9 @@
       </div>
     </div>
   </footer>
+
+
+
   <!-- partial -->
 </div>
 </div>

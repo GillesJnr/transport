@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.db.models import Q
+# from django.db.models.signals import post_save
+# from django.dispatch import receiver
+from django.contrib.auth.models import UserManager, AbstractUser
 
 # Create your models here.
 # This is an auto-generated Django model module.
@@ -15,6 +18,7 @@ from django.utils import timezone
 
 
 class Addresses(models.Model):
+    addresses_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses", null=True)
     customer_id = models.IntegerField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
@@ -32,6 +36,7 @@ class Addresses(models.Model):
 
 
 class Allocation(models.Model):
+    allocation_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="allocation", null=True)
     month = models.TextField()
     amount = models.FloatField()
 
@@ -46,6 +51,7 @@ class Allocation(models.Model):
 
 
 class ApiSettings(models.Model):
+    apisettings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="apisettings", null=True)
     key_name = models.CharField(max_length=255, blank=True, null=True)
     key_value = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -66,6 +72,7 @@ class ApiSettings(models.Model):
 
 
 class BookingIncome(models.Model):
+    bookingincome_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookingincomes", null=True)
     booking_id = models.IntegerField(blank=True, null=True)
     income_id = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -79,10 +86,11 @@ class BookingIncome(models.Model):
         
 
     def __str__(self):
-        return self.booking_id
+        return str(self.bookingincome_user)
 
 
 class Bookings(models.Model):
+    bookings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookings", null=True)
     customer_id = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
@@ -105,7 +113,12 @@ class Bookings(models.Model):
         db_table = 'bookings'
 
 
+    def __str__(self):
+        return str(self.bookings_user)
+
+
 class BookingsMeta(models.Model):
+    bookingsmeta_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookingsmeta", null=True)
     booking_id = models.PositiveIntegerField()
     type = models.CharField(max_length=255)
     key = models.CharField(max_length=255)
@@ -169,6 +182,7 @@ class BookingsMeta(models.Model):
 
 
 class DriverVehicle(models.Model):
+    drivervehicle_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="drivervehicles", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     driver_id = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -184,6 +198,7 @@ class DriverVehicle(models.Model):
 
 
 class EmailContent(models.Model):
+    emailcontent_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="emailcontents", null=True)
     key = models.CharField(max_length=255, blank=True, null=True)
     value = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -199,6 +214,7 @@ class EmailContent(models.Model):
 
 
 class Expense(models.Model):
+    expense_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expenses", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     exp_id = models.IntegerField(blank=True, null=True)
     amount = models.FloatField()
@@ -219,6 +235,7 @@ class Expense(models.Model):
 
 
 class ExpenseCat(models.Model):
+    expensecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expensecats", null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     type = models.CharField(max_length=5, blank=True, null=True)
@@ -235,6 +252,7 @@ class ExpenseCat(models.Model):
 
 
 class FareSettings(models.Model):
+    faresettings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="faresettings", null=True)
     key_name = models.CharField(max_length=255, blank=True, null=True)
     key_value = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -253,6 +271,7 @@ class FareSettings(models.Model):
 
 
 class Fuel(models.Model):
+    fuel_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="fuels", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     start_meter = models.CharField(max_length=255, blank=True, null=True)
@@ -277,10 +296,11 @@ class Fuel(models.Model):
 
 
     def __str__(self):
-        return self.reference
+        return str (self.reference)
 
 
 class Income(models.Model):
+    income_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomes", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     income_id = models.IntegerField(blank=True, null=True)
     amount = models.FloatField()
@@ -298,10 +318,11 @@ class Income(models.Model):
 
 
     def __str__(self):
-        return self.income_id
+        return str (self.income_user)
 
 
 class IncomeCat(models.Model):
+    incomecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomecats", null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     type = models.CharField(max_length=5, blank=True, null=True)
@@ -319,6 +340,7 @@ class IncomeCat(models.Model):
 
 
 class Maintanance(models.Model):
+    maintenance_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="maintanance", null=True)
     service_id = models.IntegerField(blank=True, null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
@@ -333,6 +355,7 @@ class Maintanance(models.Model):
 
 
 class Message(models.Model):
+    message_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages", null=True)
     fcm_id = models.CharField(max_length=255, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     message = models.TextField(blank=True, null=True)
@@ -346,6 +369,7 @@ class Message(models.Model):
 
 
 class Migrations(models.Model):
+    migrations_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="migrations", null=True)
     migration = models.CharField(max_length=255)
     batch = models.IntegerField()
 
@@ -355,6 +379,7 @@ class Migrations(models.Model):
 
 
 class Mileage(models.Model):
+    mileage_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mileages", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     mileage = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
@@ -366,8 +391,12 @@ class Mileage(models.Model):
         managed = True
         db_table = 'mileage'
 
+    def __str__(self):
+        return str(self.mileage_user)
+
 
 class Notes(models.Model):
+    notes_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     customer_id = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
@@ -386,6 +415,7 @@ class Notes(models.Model):
 
 
 class Notifications(models.Model):
+    notifications_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notifications", null=True)
     id = models.CharField(primary_key=True, max_length=36)
     type = models.CharField(max_length=255)
     notifiable_type = models.CharField(max_length=255)
@@ -403,10 +433,10 @@ class Notifications(models.Model):
 
 
     def __str__(self):
-        return self.id
-
+        return self.notifiable_type
 
 class PasswordResets(models.Model):
+    passwordresets_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="passwordresets", null=True)
     email = models.CharField(max_length=255)
     token = models.CharField(max_length=255)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -417,6 +447,7 @@ class PasswordResets(models.Model):
 
 
 class Reasons(models.Model):
+    reasons_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reasons", null=True)
     reason = models.TextField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -433,6 +464,7 @@ class Reasons(models.Model):
 
 
 class Reviews(models.Model):
+    reviews_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews", null=True)
     user_id = models.IntegerField(blank=True, null=True)
     booking_id = models.IntegerField(blank=True, null=True)
     driver_id = models.IntegerField(blank=True, null=True)
@@ -453,6 +485,7 @@ class Reviews(models.Model):
 
 
 class ServiceItems(models.Model):
+    serviceitem_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="serviceitems", null=True)
     description = models.TextField(blank=True, null=True)
     time_interval = models.CharField(max_length=255, blank=True, null=True)
     overdue_time = models.CharField(max_length=255, blank=True, null=True)
@@ -479,6 +512,7 @@ class ServiceItems(models.Model):
 
 
 class ServiceReminder(models.Model):
+    servicereminder_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="servicereminders", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     service_id = models.IntegerField(blank=True, null=True)
     last_date = models.CharField(max_length=255, blank=True, null=True)
@@ -491,8 +525,11 @@ class ServiceReminder(models.Model):
         managed = True
         db_table = 'service_reminder'
 
+    def __str__(self):
+        return str(self.servicereminder_user)
 
 class Settings(models.Model):
+    settings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="settings", null=True)
     label = models.CharField(max_length=255)
     name = models.CharField(unique=True, max_length=255)
     value = models.TextField()
@@ -504,12 +541,18 @@ class Settings(models.Model):
         managed = True
         db_table = 'settings'
 
+    def __str__(self):
+        return self.settings_user
+
 
 class Users(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255, blank=True, null=True)
+    # password = models.CharField(max_length=255, blank=True, null=True)
     user_type = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    phone_number = models.CharField(max_length=10, blank=True, null=True)
     group_id = models.IntegerField(blank=True, null=True)
     api_token = models.CharField(unique=True, max_length=60)
     remember_token = models.CharField(max_length=100, blank=True, null=True)
@@ -518,17 +561,33 @@ class Users(models.Model):
     deleted_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
 
 
+    is_active = models.NullBooleanField(default=True, null=True)
+    is_staff = models.NullBooleanField(default=False, null=True)
+    is_anonymous = models.NullBooleanField(default=False, null = True)
+    is_authenticated = models.NullBooleanField(default=True, null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    objects = UserManager()
+
+
     class Meta:
         managed = True
         db_table = 'users'
         verbose_name = "User"
         verbose_name_plural = "Users"
+        #   swappable = 'AUTH_USER_MODEL'
+    
+
+    
 
     def __str__(self):
         return self.name
 
 
 class UsersMeta(models.Model):
+    usersmeta_user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="usersmeta", null=True)
     user_id = models.PositiveIntegerField()
     type = models.CharField(max_length=255)
     key = models.CharField(max_length=255)
@@ -546,6 +605,7 @@ class UsersMeta(models.Model):
 
 
 class VehicleGroup(models.Model):
+    vehiclegroup_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vehiclegroup", null=True)
     name = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
@@ -562,6 +622,7 @@ class VehicleGroup(models.Model):
 
 
 class Vehicles(models.Model):
+    vehicles_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vehicles", null=True)
     make = models.CharField(max_length=255, blank=True, null=True)
     model = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=255, blank=True, null=True)
@@ -577,7 +638,7 @@ class Vehicles(models.Model):
     license_plate = models.CharField(max_length=255)
     mileage = models.IntegerField(blank=True, null=True)
     in_service = models.IntegerField(blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True)
+    # user_id = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
@@ -593,6 +654,7 @@ class Vehicles(models.Model):
 
 
 class VehiclesMeta(models.Model):
+    vehiclesmeta_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vehiclesmeta", null=True)
     vehicle_id = models.PositiveIntegerField()
     type = models.CharField(max_length=255)
     key = models.CharField(max_length=255)
@@ -609,6 +671,7 @@ class VehiclesMeta(models.Model):
         return self.key
 
 class Vendors(models.Model):
+    vendors_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vendors", null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     photo = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=255, blank=True, null=True)
@@ -635,6 +698,7 @@ class Vendors(models.Model):
 
 
 class WorkOrders(models.Model):
+    workorder_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="workorders", null=True)
     created_on = models.DateField(blank=True, null=True)
     required_by = models.DateField(blank=True, null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)

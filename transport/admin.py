@@ -1,9 +1,18 @@
 from django.contrib import admin
-# from .models import Addresses,Allocation,ApiSettings,AuthPermission,AuthUser,BookingIncome, Bookings
-# from .models import BookingsMeta, DriverVehicle, EmailContent, Expense,ExpenseCat, FareSettings, Fuel
 from .models import *
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 # Register your models here.
 
+admin.site.unregister(User)
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    pass
+
+
+# class UsersAdmin(admin.ModelAdmin):
+#     list_display = ('id','name','email','password','group_id','user_type','is_staff','is_active','api_token','last_login')
 
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('address', 'customer_id', 'id')
@@ -21,10 +30,10 @@ class ApiSettingsAdmin(admin.ModelAdmin):
 #     list_display = ('username','password','last_login','email', 'first_name','last_name','is_staff', 'date_joined')
 
 class BookingIncomeAdmin(admin.ModelAdmin):
-    list_display = ('booking_id', 'income_id', 'created_at')
+    list_display = ('bookingincome_user','booking_id', 'income_id', 'created_at')
 
 class BookingsAdmin(admin.ModelAdmin):
-    list_display = ('created_at', 'dest_addr', 'pickup_addr', 'note', 'duration', 'status', 'travellers', 'user_id')
+    list_display = ('bookings_user','created_at', 'dest_addr', 'pickup_addr', 'note', 'duration', 'status', 'travellers', 'user_id')
 
 class BookingsMetaAdmin(admin.ModelAdmin):
     list_display = ('key', 'value', 'type', 'booking_id')
@@ -49,7 +58,7 @@ class FuelAdmin(admin.ModelAdmin):
     list_display = ('fuel_from','province', 'cost_per_unit','vendor_name','note', 'qty', 'vehicle_id', 'user_id')
 
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ('amount','income_id','income_cat', 'user_id','mileage', 'date' ,'created_at')
+    list_display = ('income_user','amount','income_id','income_cat', 'user_id','mileage', 'date' ,'created_at')
 
 
 class IncomeCatAdmin(admin.ModelAdmin):
@@ -73,7 +82,8 @@ class ServiceItemsAdmin(admin.ModelAdmin):
     list_display = ('description','time_interval','created_at')
 
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('name','email','user_type','group_id','api_token','password','created_at')
+    list_display = ('name','address','phone_number','user_type','group_id','api_token','created_at')
+    exclude = ('id',)
 
 class UsersMetaAdmin(admin.ModelAdmin):
     list_display = ('type','key','value','user_id','created_at')
