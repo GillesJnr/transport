@@ -92,7 +92,7 @@ class VehicleGroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'note')
 
 class VehiclesAdmin(admin.ModelAdmin):
-    list_display = ('make','model','type','year','engine_type','vehicle_image')
+    list_display = ('make','model','type','year', 'group' ,'engine_type','vehicle_image')
 
 class VehiclesMetaAdmin(admin.ModelAdmin):
     list_display = ('type','key','value','vehicle_id','created_at')

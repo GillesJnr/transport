@@ -627,7 +627,7 @@ class Vehicles(models.Model):
     model = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=255, blank=True, null=True)
     year = models.CharField(max_length=255, blank=True, null=True)
-    group_id = models.IntegerField(blank=True, null=True)
+    group = models.ForeignKey(VehicleGroup, on_delete=models.CASCADE, related_name="vehicle_group", null=True)
     lic_exp_date = models.DateField(blank=True, null=True)
     reg_exp_date = models.DateField(blank=True, null=True)
     vehicle_image = models.ImageField(blank=True, null=True)
