@@ -56,7 +56,7 @@
 
             <div class="mdc-list-item mdc-drawer-item">
               <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel" data-target="ui-sub-menu">
-                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">groups</i>
+                <i id="usertab" class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">groups</i>
                 Users
                 <i class="mdc-drawer-arrow material-icons">chevron_right</i>
               </a>
@@ -84,8 +84,6 @@
               </div>
             </div>
 
-
-
             <div class="mdc-list-item mdc-drawer-item">
               <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel1" data-target="ui-sub-menu1">
                 <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">directions_car</i>
@@ -95,13 +93,13 @@
               <div class="mdc-expansion-panel1" id="ui-sub-menu1">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
+                    <a class="mdc-drawer-link" href="{% url 'manage_vehicles' %}">
                     <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">local_shipping</i>
                       Manage Vehicles
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
+                    <a class="mdc-drawer-link" href="{% url 'vehicles_group' %}">
                     <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">map</i>
                       Manage Vehicle Group
                     </a>
@@ -109,6 +107,8 @@
                 </nav>
               </div>
             </div>
+
+            
 
             <div class="mdc-list-item mdc-drawer-item">
               <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel2" data-target="ui-sub-menu2">

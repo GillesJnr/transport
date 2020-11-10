@@ -544,11 +544,11 @@ class Settings(models.Model):
     def __str__(self):
         return self.settings_user
 
-
 class Users(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(unique=True)
+    user_image = models.ImageField(default='',blank=True, null=True)
     # password = models.CharField(max_length=255, blank=True, null=True)
     user_type = models.CharField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
@@ -630,7 +630,7 @@ class Vehicles(models.Model):
     group_id = models.IntegerField(blank=True, null=True)
     lic_exp_date = models.DateField(blank=True, null=True)
     reg_exp_date = models.DateField(blank=True, null=True)
-    vehicle_image = models.CharField(max_length=255, blank=True, null=True)
+    vehicle_image = models.ImageField(blank=True, null=True)
     engine_type = models.CharField(max_length=255, blank=True, null=True)
     horse_power = models.CharField(max_length=255, blank=True, null=True)
     color = models.CharField(max_length=255, blank=True, null=True)
@@ -673,7 +673,7 @@ class VehiclesMeta(models.Model):
 class Vendors(models.Model):
     vendors_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vendors", null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
-    photo = models.CharField(max_length=255, blank=True, null=True)
+    photo = models.ImageField(blank=True, null=True)
     type = models.CharField(max_length=255, blank=True, null=True)
     website = models.CharField(max_length=255, blank=True, null=True)
     custom_type = models.CharField(max_length=255, blank=True, null=True)

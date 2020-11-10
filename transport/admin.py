@@ -82,7 +82,7 @@ class ServiceItemsAdmin(admin.ModelAdmin):
     list_display = ('description','time_interval','created_at')
 
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('name','address','phone_number','user_type','group_id','api_token','created_at')
+    list_display = ('name','user_image','address','phone_number','user_type','group_id','api_token','created_at')
     exclude = ('id',)
 
 class UsersMetaAdmin(admin.ModelAdmin):

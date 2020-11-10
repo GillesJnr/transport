@@ -14,9 +14,8 @@ right: 0;
         <div class="col-12 col-md-12">
           <div class="box box-primary">
                 <div class="box-header with-border container">
-                  
-                    <h3 style="float:left" class="box-title float-left">Manage Drivers</h3>
-                    <a href="#" class="btn btn-primary btn-sm float-right">Add New</a>
+                    <h3 style="float:left" class="box-title float-left">Vehicle Group </h3>
+                    <a href="#" class="btn btn-primary btn-sm float-right">Create Group</a>
                   </div>
         </div>
       </div>
@@ -43,17 +42,19 @@ right: 0;
           <tbody>
             {% for row in data %}
             <tr>
-              <td class="text-left align-middle table-font-change"><img style="height: 70px; width: 70px;" class="image-responsive" src="media/{{ row.user_image }}"></td>
-              <td class="text-left align-middle table-font-change">{{ row.name }}</td>
-              <td class="text-left align-middle table-font-change">{{ row.email}}</td>
-              <td class="text-left align-middle table-font-change">{{ row.phone_number}}</td>
-              <td class="text-left align-middle table-font-change">{{ row.address}}</td>
+              <td class="text-left align-middle table-font-change"><img style="height: 70px; width: 70px;" class="image-responsive" src="media/{{ row.vehicle_image }}"></td>
+              <td class="text-left align-middle table-font-change">{{ row.make }}</td>
+              <td class="text-left align-middle table-font-change">{{ row.model}}</td>
+              <td class="text-left align-middle table-font-change">{{ row.type}}</td>
+              <td class="text-left align-middle table-font-change">{{ row.year}}</td>
               <td class="text-left align-middle table-font-change">{{ row.created_at|date:"D, d M, Y"}}</td>
               <td class="text-left align-middle table-font-change">
                 <div class="btn-group">
 
                   <button type="button" class="btn btn-primary align-middle" data-toggle="dropdown">
                     <i class="fa fa-cog" aria-hidden="true"></i>
+                    <!-- <span class="glyphicon-glyphicon-cog dropdown-toggle"></span>
+                    <span class="sr-only align-middle">Toggle Dropdown</span> -->
                   </button>
                   <ul class="dropdown-menu custom" role="menu">
                      <li style="padding:2px 10px;">
@@ -98,7 +99,6 @@ $("#del_btn").on("click",function(){
 
    $('#changepass').on('show.bs.modal', function(e) {
   var id = e.relatedTarget.dataset.id;
-
   $("#driver_id").val(id);
     });
 
@@ -115,7 +115,6 @@ $("#del_btn").on("click",function(){
             type: 'info'
         });
       },
-
       dataType: "html"
     });
     $('#changepass').modal("hide");

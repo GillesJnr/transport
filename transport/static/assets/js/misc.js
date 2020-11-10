@@ -32,16 +32,17 @@
             $(this).closest('.mdc-expansion-panel').addClass('expanded');
           }
         }
-      } else {
-        //for other url
-        if ($this.attr('href').indexOf(current) !== -1) {
-          $(this).addClass('active');
-          if ($(this).parents('.mdc-expansion-panel').length) {
-            $(this).closest('.mdc-expansion-panel').addClass('expanded'); 
-            $(this).closest('.mdc-expansion-panel').show();
-          }
-        }
       }
+      //  else {
+      //   //for other url
+      //   if ($this.attr('href').indexOf(current) !== -1) {
+      //     $(this).addClass('active');
+      //     if ($(this).parents('.mdc-expansion-panel1').length) {
+      //       $(this).closest('.mdc-expansion-panel1').addClass('expanded'); 
+      //       $(this).closest('.mdc-expansion-panel1').show();
+      //     }
+      //   }
+      // } 
     });
 
     // Toggle Sidebar items
