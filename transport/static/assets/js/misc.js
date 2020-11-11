@@ -33,16 +33,16 @@
           }
         }
       }
-      //  else {
-      //   //for other url
-      //   if ($this.attr('href').indexOf(current) !== -1) {
-      //     $(this).addClass('active');
-      //     if ($(this).parents('.mdc-expansion-panel1').length) {
-      //       $(this).closest('.mdc-expansion-panel1').addClass('expanded'); 
-      //       $(this).closest('.mdc-expansion-panel1').show();
-      //     }
-      //   }
-      // } 
+       else {
+        //for other url
+        if ($this.attr('href').indexOf(current) !== -1) {
+          $(this).addClass('active');
+          if ($(this).parents('.mdc-expansion-panel').length) {
+            $(this).closest('.mdc-expansion-panel').addClass('expanded'); 
+            $(this).closest('.mdc-expansion-panel').show();
+          }
+        }
+      } 
     });
 
     // Toggle Sidebar items
@@ -146,6 +146,15 @@
       });
     });
 
+    $('[data-toggle="expansionPanel10"]').on('click', function () {
+      // close other items
+      $('.mdc-expansion-panel10').not($('#' + $(this).attr("data-target"))).hide(300);
+      $('.mdc-expansion-panel10').not($('#' + $(this).attr("data-target"))).prev('[data-toggle="expansionPanel10"]').removeClass("expanded");
+      // Open toggle menu
+      $('#' + $(this).attr("data-target")).slideToggle(300, function() {
+        $('#' + $(this).attr("data-target")).toggleClass('expanded');
+      });
+    });
 
 
 
@@ -206,6 +215,12 @@
 
     $('.mdc-drawer-item .mdc-expansion-panel9').each(function () {
       $(this).prev('[data-toggle="expansionPanel9"]').on('click', function () {
+        $(this).toggleClass('expanded');
+      })
+    });
+
+    $('.mdc-drawer-item .mdc-expansion-panel10').each(function () {
+      $(this).prev('[data-toggle="expansionPanel10"]').on('click', function () {
         $(this).toggleClass('expanded');
       })
     });

@@ -119,13 +119,15 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu2">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'manage_income' %}">
+                      <i class="fa fa-list-alt" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Manage Income
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'manage_expense' %}">
+                      <i class="fa fa-list-alt" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Manage Expense
                     </a>
                   </div>
                 </nav>
@@ -141,13 +143,21 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu3">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'new_booking' %}">
+                      <i class="fa fa-address-book" style="margin-right: 8px;" aria-hidden="true"></i>
+                      New Booking
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'manage_booking' %}">
+                      <i class="fa fa-tasks" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Manage Bookings
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'booking_calendar' %}">
+                      <i class="fa fa-calendar" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Booking Calendar
                     </a>
                   </div>
                 </nav>
@@ -163,13 +173,57 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu4">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'delinquent_report' %}">
+                      <i class="fa fa-address-book" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Delinquent Report
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'monthly_report' %}">
+                      <i class="fa fa-calendar" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Monthly Report
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'booking_report' %}">
+                      <i class="fa fa-book" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Booking Report
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'users_report' %}">
+                      <i class="fa fa-address-book" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Users Report
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'fuel_report' %}">
+                      <i class="fa fa-truck" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Fuel Report
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'driver_report' %}">
+                      <i class="fa fa-id-card" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Driver Report
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'customer_report' %}">
+                      <i class="fa fa-users" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Customer Report
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'vendor_report' %}">
+                      <i class="fa fa-cubes" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Vendor Report
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'yearly_report' %}">
+                      <i class="fa fa-calendar" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Yearly Report
                     </a>
                   </div>
                 </nav>
@@ -185,13 +239,15 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu5">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'manage_fuel' %}">
+                      <i class="fa fa-history" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Fuel History
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'add_fuel' %}">
+                      <i class="fa fa-plus-square" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Add Fuel
                     </a>
                   </div>
                 </nav>
@@ -208,13 +264,15 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu6">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'add_vendor' %}">
+                      <i class="fa fa-plus-square" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Add Vendor
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'manage_vendor' %}">
+                      <i class="fa fa-cube" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Manage Vendor
                     </a>
                   </div>
                 </nav>
@@ -231,13 +289,15 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu7">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'add_workorder' %}">
+                      <i class="fa fa-plus-square" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Add Work Order
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'manage_workorder' %}">
+                      <i class="fa fa-inbox" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Manage Work Order
                     </a>
                   </div>
                 </nav>
@@ -256,13 +316,15 @@
               <div class="mdc-expansion-panel" id="ui-sub-menu8">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'add_note' %}">
+                      <i class="fa fa-plus-square" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Create Note
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'manage_note' %}">
+                      <i class="fa fa-flag" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Manage Notes
                     </a>
                   </div>
                 </nav>
@@ -276,15 +338,23 @@
                 <i class="mdc-drawer-arrow material-icons">chevron_right</i>
               </a>
               <div class="mdc-expansion-panel" id="ui-sub-menu9">
-                <nav class="mdc-list mdc-drawer-submenu">
+                <nav class="mdc-list mdc drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'manage_reminder' %}">
+                      <i class="fa fa-folder-open" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Manage Reminders
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'add_reminder' %}">
+                      <i class="fa fa-plus-square" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Add Service Reminder
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'service_item' %}">
+                      <i class="fa fa-file" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Service Item
                     </a>
                   </div>
                 </nav>
@@ -293,21 +363,59 @@
 
 
             <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel3" data-target="ui-sub-menu">
+              <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel10" data-target="ui-sub-menu10">
                 <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">settings</i>
                 Settings
                 <i class="mdc-drawer-arrow material-icons">chevron_right</i>
               </a>
-              <div class="mdc-expansion-panel" id="ui-sub-menu">
+              <div class="mdc-expansion-panel" id="ui-sub-menu10">
                 <nav class="mdc-list mdc-drawer-submenu">
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                      Buttons
+                    <a class="mdc-drawer-link" href="{% url 'general_settings' %}">
+                      <i class="fa fa-cog" style="margin-right: 8px;" aria-hidden="true"></i>
+                      General Settings
                     </a>
                   </div>
                   <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                      Typography
+                    <a class="mdc-drawer-link" href="{% url 'api_settings' %}">
+                      <i class="fa fa-cog" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Api Settings
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'cancellation_reason' %}">
+                      <i class="fa fa-times" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Cancellation Reasons 
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'email_notification' %}">
+                      <i class="fa fa-envelope" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Email Notification
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'email_content' %}">
+                      <i class="fa fa-envelope-open" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Set Email Content
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'fare_settings' %}">
+                      <i class="fa fa-cog" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Fare Settings
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'expense_categories' %}">
+                      <i class="fa fa-tasks" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Expense Categories  
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'income_categories' %}">
+                      <i class="fa fa-tasks" style="margin-right: 8px;" aria-hidden="true"></i>
+                      Income Categories
                     </a>
                   </div>
                 </nav>
@@ -317,7 +425,7 @@
 
           
 
-            <div class="mdc-list-item mdc-drawer-item">
+            <!-- <div class="mdc-list-item mdc-drawer-item">
               <a class="mdc-drawer-link" href="pages/tables/basic-tables.html">
                 <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
                 Tables
@@ -382,7 +490,7 @@
               </a>
             </div>
           </nav>
-        </div>
+        </div> -->
         <div class="profile-actions">
           <a href="javascript:;">Settings</a>
           <span class="divider"></span>

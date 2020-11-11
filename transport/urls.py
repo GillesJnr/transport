@@ -34,6 +34,7 @@ urlpatterns = [
     path('vendors/add', views.add_vendor, name='add_vendor'),
     path('vendors/manage', views.manage_vendor, name='manage_vendor'),
     path('workorder/add', views.add_workorder, name="add_workorder"),
+    path('workorder/manage', views.manage_workorder, name="manage_workorder"),
     path('notes/add', views.add_note , name="add_note"),
     path('notes/manage', views.manage_note, name="manage_note"),
     path('reminder/add', views.add_reminder, name="add_reminder"),

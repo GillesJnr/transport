@@ -6,6 +6,7 @@ from django.contrib.auth import (login as auth_login,  authenticate, logout as a
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import date
+from django.db.models import Count
 
 
 # Create your views here.
@@ -69,9 +70,13 @@ def manage_vehicles(request):
 def vehicles_group(request):
     data = VehicleGroup.objects.all()
     vehicle_data = Vehicles.objects.all()
+    group_total = Vehicles.objects.aggregate(Count('group'))['group__count']
+    user_total = Vehicles.objects.aggregate(Count('vehicles_user'))['vehicles_user__count']
     context = {
         'data': data,
-        'vehicle_data': vechicle_data,
+        'vehicle_data': vehicle_data,
+        'group_total':  group_total,
+        'user_total': user_total,
     }
     return render(request, "transport/demo/pages/vehicles/vehiclesgroup.html", context)
 
@@ -157,6 +162,11 @@ def manage_vendor(request):
 @login_required(login_url='login')
 def add_workorder(request):
     pass
+
+@login_required(login_url='login')
+def manage_workorder(request):
+    pass
+
 
 @login_required(login_url='login')
 def add_note(request):
