@@ -156,7 +156,8 @@ def add_vendor(request):
 
 @login_required(login_url='login')
 def manage_vendor(request):
-    pass
+    data = Vendors.objects.all()
+    return render(request, "transport/demo/pages/vendors/index.html", {'data':data})
 
 
 @login_required(login_url='login')

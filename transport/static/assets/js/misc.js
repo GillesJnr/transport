@@ -36,7 +36,7 @@
        else {
         //for other url
         if ($this.attr('href').indexOf(current) !== -1) {
-          $(this).addClass('active');
+          // $(this).addClass('active');
           if ($(this).parents('.mdc-expansion-panel').length) {
             $(this).closest('.mdc-expansion-panel').addClass('expanded'); 
             $(this).closest('.mdc-expansion-panel').show();
