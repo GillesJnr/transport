@@ -395,23 +395,6 @@ class Mileage(models.Model):
         return str(self.mileage_user)
 
 
-class Notes(models.Model):
-    notes_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True)
-    vehicle_id = models.IntegerField(blank=True, null=True)
-    customer_id = models.IntegerField(blank=True, null=True)
-    note = models.TextField(blank=True, null=True)
-    submitted_on = models.DateField(blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'notes'
-
-    def __str__(self):
-        return self.note
 
 
 class Notifications(models.Model):
@@ -701,8 +684,8 @@ class WorkOrders(models.Model):
     workorder_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="workorders", null=True)
     created_on = models.DateField(blank=True, null=True)
     required_by = models.DateField(blank=True, null=True)
-    vehicle_id = models.IntegerField(blank=True, null=True)
-    vendor_id = models.IntegerField(blank=True, null=True)
+    vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicle_id", blank=True, null=True)
+    vendor_id = models.ForeignKey(Vendors, on_delete=models.CASCADE, related_name="vendor_id", blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -715,3 +698,24 @@ class WorkOrders(models.Model):
     class Meta:
         managed = True
         db_table = 'work_orders'
+        verbose_name = "Work Order"
+        verbose_name_plural = 'Work Orders'
+
+
+class Notes(models.Model):
+    notes_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True)
+    vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicles", blank=True, null=True)
+    customer_id = models.IntegerField(blank=True, null=True)
+    note = models.TextField(blank=True, null=True)
+    submitted_on = models.DateField(blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'notes'
+
+    def __str__(self):
+        return self.note

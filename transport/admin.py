@@ -100,6 +100,9 @@ class VehiclesMetaAdmin(admin.ModelAdmin):
 class VendorsAdmin(admin.ModelAdmin):
     list_display = ('name','photo','type','website','note','phone','address1','city','email')
 
+class WorkOrderAdmin(admin.ModelAdmin):
+    list_display= ('status','note','description','price','vehicle_id', 'vendor_id')
+
 
 
 admin.site.register(Addresses, AddressAdmin)
@@ -129,3 +132,4 @@ admin.site.register(VehicleGroup, VehicleGroupAdmin)
 admin.site.register(Vehicles, VehiclesAdmin)
 admin.site.register(VehiclesMeta, VehiclesMetaAdmin)
 admin.site.register(Vendors, VendorsAdmin)
+admin.site.register(WorkOrders, WorkOrderAdmin)

@@ -166,7 +166,8 @@ def add_workorder(request):
 
 @login_required(login_url='login')
 def manage_workorder(request):
-    pass
+    data = WorkOrders.objects.all()
+    return render(request, "transport/demo/pages/workorders/manageworkorders.html", {'data':data})
 
 
 @login_required(login_url='login')
@@ -175,7 +176,8 @@ def add_note(request):
 
 @login_required(login_url='login')
 def manage_note(request):
-    pass
+    data = Notes.objects.all()
+    return render(request, "transport/demo/pages/notes/index.html", {'data':data})
 
 @login_required(login_url='login')
 def add_reminder(request):
