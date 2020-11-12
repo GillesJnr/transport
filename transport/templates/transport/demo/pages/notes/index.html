@@ -36,7 +36,7 @@ right: 0;
         <table class="table table-hoverable">
           <thead>
             <tr>
-              <th class="text-left align-middle table-font-change">Vehicle</th>
+              <th class="text-left align-middle table-font-change"><i class="fa fa-sort mr-2" aria-hidden="true"></i>Vehicle</th>
               <th class="text-left align-middle table-font-change"></th>
               <th class="text-left align-middle table-font-change">Person in Charge</th>
               <th class="text-left align-middle table-font-change">Submitted on </th>
@@ -50,12 +50,10 @@ right: 0;
             {% for row in data %}
             <tr>
               <td class="text-left align-middle"><img style="height: 70px; width: 70px;" class="image-responsive" src="media/{{ row.vehicle_id.vehicle_image }}"></td>
-              <td id="text-reverse" style="white-space:pre-line !important;" class="text-left align-middle table-font-change">{{ row.vehicle_id.year }} {{row.vehicle_id.make}} - {{row.vehicle_id.model}} <strong>VIN</strong>: {{row.vehicle_id.vin}} <strong>Plate</strong>: {{ row.vehicle_id.license_plate }}</td>
-              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.created_on }}</td>
-              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.required_by }}</td>
-              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.vendor_id.name }}</td>
-              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.description }}</td>
-              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.price }}</td>
+              <td id="text-reverse" style="white-space:pre-line !important;" class="text-left align-middle table-font-change">{{ row.vehicle_id.year }} {{row.vehicle_id.make}} - {{row.vehicle_id.model}} <br><strong>VIN</strong>: {{row.vehicle_id.vin}} <strong>Plate</strong>: {{ row.vehicle_id.license_plate }}</td>
+              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.vehicle_id.vehicles_user }}</td>
+              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.submitted_on }}</td>
+              <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.note }}</td>
               <td id="text-reverse" class="text-left align-middle table-font-change">{{ row.status }}</td>
               <td class="text-left align-middle table-font-change">
                 <div class="btn-group">

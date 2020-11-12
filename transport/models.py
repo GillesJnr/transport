@@ -605,7 +605,7 @@ class VehicleGroup(models.Model):
 
 
 class Vehicles(models.Model):
-    vehicles_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vehicles", null=True)
+    vehicles_user = models.ForeignKey(Users , on_delete=models.CASCADE, related_name="vehicles", null=True)
     make = models.CharField(max_length=255, blank=True, null=True)
     model = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=255, blank=True, null=True)
