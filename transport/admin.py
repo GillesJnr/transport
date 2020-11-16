@@ -79,7 +79,10 @@ class ReviewsAdmin(admin.ModelAdmin):
     list_display = ('ratings','review_text','user_id','created_at')		
 
 class ServiceItemsAdmin(admin.ModelAdmin):
-    list_display = ('description','time_interval','created_at')
+    list_display = ('description','time_interval','created_at','overdue_time','overdue_unit','meter_interval','overdue_meter','show_time','show_meter','duesoon_time','duesoon_unit','duesoon_meter')
+
+class ServiceReminderAdmin(admin.ModelAdmin):
+    list_display = ('vehicle_id','service_id','last_date','last_meter','created_at')
 
 class UsersAdmin(admin.ModelAdmin):
     list_display = ('name','user_image','address','phone_number','user_type','group_id','api_token','created_at')
@@ -133,3 +136,4 @@ admin.site.register(Vehicles, VehiclesAdmin)
 admin.site.register(VehiclesMeta, VehiclesMetaAdmin)
 admin.site.register(Vendors, VendorsAdmin)
 admin.site.register(WorkOrders, WorkOrderAdmin)
+admin.site.register(ServiceReminder, ServiceReminderAdmin)

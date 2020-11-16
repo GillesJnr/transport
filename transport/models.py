@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Q
+# from datetime import timedelta
 # from django.db.models.signals import post_save
 # from django.dispatch import receiver
 from django.contrib.auth.models import UserManager, AbstractUser
@@ -16,6 +17,47 @@ from django.contrib.auth.models import UserManager, AbstractUser
 # Feel free to rename the models, but don't rename db_table values or field names.
 # from django.db import models
 
+
+class Users(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(unique=True)
+    user_image = models.ImageField(default='',blank=True, null=True)
+    # password = models.CharField(max_length=255, blank=True, null=True)
+    user_type = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    phone_number = models.CharField(max_length=10, blank=True, null=True)
+    group_id = models.IntegerField(blank=True, null=True)
+    api_token = models.CharField(unique=True, max_length=60)
+    remember_token = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
+    updated_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
+    deleted_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
+
+
+    is_active = models.NullBooleanField(default=True, null=True)
+    is_staff = models.NullBooleanField(default=False, null=True)
+    is_anonymous = models.NullBooleanField(default=False, null = True)
+    is_authenticated = models.NullBooleanField(default=True, null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    objects = UserManager()
+
+
+    class Meta:
+        managed = True
+        db_table = 'users'
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+        #   swappable = 'AUTH_USER_MODEL'
+    
+
+    
+
+    def __str__(self):
+        return self.name
 
 class Addresses(models.Model):
     addresses_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses", null=True)
@@ -252,7 +294,7 @@ class ExpenseCat(models.Model):
 
 
 class FareSettings(models.Model):
-    faresettings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="faresettings", null=True)
+    # faresettings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="faresettings", null=True)
     key_name = models.CharField(max_length=255, blank=True, null=True)
     key_value = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -468,18 +510,18 @@ class Reviews(models.Model):
 
 
 class ServiceItems(models.Model):
-    serviceitem_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="serviceitems", null=True)
+    # serviceitem_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="serviceitems", null=True)
     description = models.TextField(blank=True, null=True)
     time_interval = models.CharField(max_length=255, blank=True, null=True)
-    overdue_time = models.CharField(max_length=255, blank=True, null=True)
+    overdue_time = models.IntegerField(blank=True, null=True)
     overdue_unit = models.CharField(max_length=255, blank=True, null=True)
     meter_interval = models.CharField(max_length=255, blank=True, null=True)
-    overdue_meter = models.CharField(max_length=255, blank=True, null=True)
+    overdue_meter = models.IntegerField(blank=True, null=True)
     show_time = models.CharField(max_length=255, blank=True, null=True)
-    duesoon_time = models.CharField(max_length=255, blank=True, null=True)
+    duesoon_time = models.IntegerField(blank=True, null=True)
     duesoon_unit = models.CharField(max_length=255, blank=True, null=True)
     show_meter = models.CharField(max_length=255, blank=True, null=True)
-    duesoon_meter = models.CharField(max_length=255, blank=True, null=True)
+    duesoon_meter = models.IntegerField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
@@ -494,25 +536,10 @@ class ServiceItems(models.Model):
         return self.description
 
 
-class ServiceReminder(models.Model):
-    servicereminder_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="servicereminders", null=True)
-    vehicle_id = models.IntegerField(blank=True, null=True)
-    service_id = models.IntegerField(blank=True, null=True)
-    last_date = models.CharField(max_length=255, blank=True, null=True)
-    last_meter = models.IntegerField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
 
-    class Meta:
-        managed = True
-        db_table = 'service_reminder'
-
-    def __str__(self):
-        return str(self.servicereminder_user)
 
 class Settings(models.Model):
-    settings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="settings", null=True)
+    settings_user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="settings", null=True)
     label = models.CharField(max_length=255)
     name = models.CharField(unique=True, max_length=255)
     value = models.TextField()
@@ -527,46 +554,7 @@ class Settings(models.Model):
     def __str__(self):
         return self.settings_user
 
-class Users(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    email = models.EmailField(unique=True)
-    user_image = models.ImageField(default='',blank=True, null=True)
-    # password = models.CharField(max_length=255, blank=True, null=True)
-    user_type = models.CharField(max_length=255, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    phone_number = models.CharField(max_length=10, blank=True, null=True)
-    group_id = models.IntegerField(blank=True, null=True)
-    api_token = models.CharField(unique=True, max_length=60)
-    remember_token = models.CharField(max_length=100, blank=True, null=True)
-    created_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
-    updated_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
-    deleted_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
 
-
-    is_active = models.NullBooleanField(default=True, null=True)
-    is_staff = models.NullBooleanField(default=False, null=True)
-    is_anonymous = models.NullBooleanField(default=False, null = True)
-    is_authenticated = models.NullBooleanField(default=True, null=True)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
-
-    objects = UserManager()
-
-
-    class Meta:
-        managed = True
-        db_table = 'users'
-        verbose_name = "User"
-        verbose_name_plural = "Users"
-        #   swappable = 'AUTH_USER_MODEL'
-    
-
-    
-
-    def __str__(self):
-        return self.name
 
 
 class UsersMeta(models.Model):
@@ -719,3 +707,21 @@ class Notes(models.Model):
 
     def __str__(self):
         return self.note
+
+
+class ServiceReminder(models.Model):
+    # servicereminder_user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="servicereminders", null=True)
+    vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicleservice" ,blank=True, null=True)
+    service_id = models.ForeignKey(ServiceItems, on_delete=models.CASCADE, related_name="service",blank=True, null=True)
+    last_date = models.DateField(blank=True, null=True)
+    last_meter = models.IntegerField(blank=True, null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'service_reminder'
+
+    def __str__(self):
+        return str(self.vehicle_id)

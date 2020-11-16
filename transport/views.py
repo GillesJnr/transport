@@ -6,19 +6,46 @@ from django.contrib.auth import (login as auth_login,  authenticate, logout as a
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import date
-from django.db.models import Count
+from django.db.models import Count, Sum, Avg
+from datetime import timedelta
 
 
 # Create your views here.
 
 @login_required(login_url='login')
 def home(request):
-    today = date.today()
+    # today = date.today()
     # income = Income.objects.all().filter(date__year=today.year).aggregate(sum('amount'))
-    # context = {
-    #     'income' : income,
-    # }
-    return render(request, "transport/demo/layout.html")
+    income = Income.objects.values('amount').aggregate(Sum('amount')).get('amount__sum')
+    income = "{:.2f}".format(income)
+
+    expense = Expense.objects.values('amount').aggregate(Sum('amount')).get('amount__sum')
+    expense = "{:.2f}".format(expense)
+
+    avg_income = Income.objects.values('amount').aggregate(Avg('amount')).get('amount__avg')
+    avg_income = "{:.2f}".format(avg_income)
+
+    users = Users.objects.all().aggregate(Count('name')).get('name__count')
+    drivers = Users.objects.all().filter(user_type='D').aggregate(Count('name')).get('name__count')
+    customers = Users.objects.all().filter(user_type='C').aggregate(Count('name')).get('name__count')
+
+    vendors = Vendors.objects.all().aggregate(Count('name')).get('name__count')
+    bookings = Bookings.objects.all().aggregate(Count('id')).get('id__count')
+    vehicles = Vehicles.objects.all().aggregate(Count('make')).get('name__count')
+
+
+    context = {
+        'income' : income,
+        'expense' : expense,
+        'avg_income' : avg_income,
+        'users' : users, 
+        'drivers' : drivers,
+        'customers' : customers, 
+        'vendors' : vendors, 
+        'bookings' : bookings,
+        'vehicles' : vehicles,
+    }
+    return render(request, "transport/demo/layout.html", context)
 
 @login_required(login_url='login')
 def adduser(request):
@@ -186,11 +213,20 @@ def add_reminder(request):
 
 @login_required(login_url='login')
 def manage_reminder(request):
-    pass
+    data = ServiceReminder.objects.all()
+    time_list = []
+    for da in data:
+        time_list.append(da.last_date + timedelta(days=da.service_id.overdue_time))
+    context = {
+        'data': data,
+        'time_list': time_list,
+    }
+    return render(request, "transport/demo/pages/service-reminder/index.html", context)
 
 @login_required(login_url='login')
 def service_item(request):
-    pass
+    data = ServiceItems.objects.all()
+    return render(request, "transport/demo/pages/service-reminder/service-items.html", {'data': data})
 
 @login_required(login_url='login')
 def general_settings(request):
@@ -214,7 +250,9 @@ def email_content(request):
 
 @login_required(login_url='login')
 def fare_settings(request):
-    pass
+    data = FareSettings.objects.all()
+    return render(request,"transport/demo/pages/settings/fare-settings.html", {'data': data})
+
 
 @login_required(login_url='login')
 def expense_categories(request):
