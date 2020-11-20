@@ -8,9 +8,13 @@ from django.contrib import messages
 from datetime import date
 from django.db.models import Count, Sum, Avg
 from datetime import timedelta
+from .forms import *
 
 
 # Create your views here.
+
+def nat(request):
+    return render(request, 'transport/demo/pages/ui-features/adduser.html')
 
 @login_required(login_url='login')
 def home(request):
@@ -49,7 +53,36 @@ def home(request):
 
 @login_required(login_url='login')
 def adduser(request):
-    return render(request, "transport/demo/pages/ui-features/adduser.html")
+    if request.method == 'POST':
+        form1 = AddUserForm(request.POST)
+        form2 = AddUsersForm(request.POST , request.FILES)
+        
+        if form2.is_valid():
+            instance = form2.save(commit=False)
+            instance.user_type = 'O'
+            instance.save()
+        else:
+            print(form2.errors)
+        if form1.is_valid():
+            instance1 = form1.save(commit=False)
+            instance1.username = form2.email
+            instance1.first_name = form2.name.split(" ")[0]
+            instance1.last_name = form2.name.split(" ")[1:]
+            instance1.email = form2.email
+            instance1.is_staff = True
+            instance1.save()
+        else:
+            print(form1.errors)
+        return render(request, "transport/demo/pages/users/index.html")
+    else:
+        form1 = AddUserForm()
+        form2 = AddUsersForm()
+        context = {
+            'form1' : form1,
+            'form2' : form2,
+        }
+        return render(request, "transport/demo/pages/users/create-user.html", context)
+    return render(request, "home")
 
 def login(request):
     if request.method == 'POST':

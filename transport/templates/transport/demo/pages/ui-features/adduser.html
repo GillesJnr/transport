@@ -1,10 +1,36 @@
 {% extends "transport/demo/layout.html" %}
-
+{% load static %}
 {% block content %}
 
-<div class="container">
-    <div class="jumbotron">
-        <h1>Hi</h1>
-    </div>
-</div>
+<main class="row mdc-layout-grid__cell">
+        <div class="col-12 col-md-12">
+          <div class="box box-primary">
+                <ul></ul>
+                </div>
+         </div>
+        </div>
+        
+    
+
+      <div class="col-12 col-md-12">
+        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12" style="margin-left:30px;">
+            <div class="mdc-card p-0">
+                       
+                            <div class="col-6">
+                                <h1 style="color:blue;">What car are you driving?</h1>
+                            </div>
+                            <div class="col-6">
+                                <img style="width: 400px; float:right;" src="{% static 'assets/images/2018_toyota_camry_angularfront.jpg' %}" alt="">
+                            </div>
+
+                     
+                                      
+                
+            </div>
+         </div>
+     </div>
+
+
+    </main>
+
 {% endblock %}

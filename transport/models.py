@@ -22,23 +22,23 @@ class Users(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(unique=True)
-    user_image = models.ImageField(default='',blank=True, null=True)
-    # password = models.CharField(max_length=255, blank=True, null=True)
+    user_image = models.ImageField(blank=True, null=True)
+    #password = models.CharField(max_length=255, blank=True, null=True)
     user_type = models.CharField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=10, blank=True, null=True)
     group_id = models.IntegerField(blank=True, null=True)
-    api_token = models.CharField(unique=True, max_length=60)
+    api_token = models.CharField(unique=True, max_length=60,blank=True)
     remember_token = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
     updated_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
     deleted_at = models.DateTimeField(default= timezone.now, blank=True, null=True)
 
 
-    is_active = models.NullBooleanField(default=True, null=True)
-    is_staff = models.NullBooleanField(default=False, null=True)
-    is_anonymous = models.NullBooleanField(default=False, null = True)
-    is_authenticated = models.NullBooleanField(default=True, null=True)
+    # is_active = models.NullBooleanField(default=True, null=True)
+    # is_staff = models.NullBooleanField(default=False, null=True)
+    # is_anonymous = models.NullBooleanField(default=False, null = True)
+    # is_authenticated = models.NullBooleanField(default=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

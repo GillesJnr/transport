@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('nat', views.nat, name="nat"),
     path('', views.home, name="home"),
     path('adduser', views.adduser, name="adduser"),
     path('login', views.login, name = "login"),
@@ -14,7 +15,7 @@ urlpatterns = [
     path('users', views.view_users, name="view_users"),
     path('drivers', views.view_drivers, name="view_drivers"),
     path('vehicles', views.manage_vehicles, name="manage_vehicles"),
-    path('vehicles-group', views.vehicles_group, name="vehicles_group"),
+    path('vehicles-group', views.vehicles_group, name="vehicles_group"),    
     path('transactions-income', views.manage_income, name="manage_income"),
     path('transactions-expense', views.manage_expense, name="manage_expense"),
     path('newbooking', views.new_booking, name="new_booking"),
