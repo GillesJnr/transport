@@ -66,7 +66,7 @@ class IncomeCatAdmin(admin.ModelAdmin):
 
 
 class NotesAdmin(admin.ModelAdmin):
-    list_display = ('note','vehicle_id','status','submitted_on','customer_id')	
+    list_display = ('note','note_vehicle','status','submitted_on','note_customer')	
 
 class NotificationsAdmin(admin.ModelAdmin):
     list_display = ('id','type','notifiable_type','data','notifiable_id','created_at', 'read_at')					
@@ -82,7 +82,7 @@ class ServiceItemsAdmin(admin.ModelAdmin):
     list_display = ('description','time_interval','created_at','overdue_time','overdue_unit','meter_interval','overdue_meter','show_time','show_meter','duesoon_time','duesoon_unit','duesoon_meter')
 
 class ServiceReminderAdmin(admin.ModelAdmin):
-    list_display = ('vehicle_id','service_id','last_date','last_meter','created_at')
+    list_display = ('sr_vehicle','sr_service','last_date','last_meter','created_at')
 
 class UsersAdmin(admin.ModelAdmin):
     list_display = ('name','user_image','address','phone_number','user_type','group_id','api_token','created_at')
@@ -104,8 +104,13 @@ class VendorsAdmin(admin.ModelAdmin):
     list_display = ('name','photo','type','website','note','phone','address1','city','email')
 
 class WorkOrderAdmin(admin.ModelAdmin):
-    list_display= ('status','note','description','price','vehicle_id', 'vendor_id')
+    list_display= ('status','note','description','price','wo_vehicle', 'wo_vendor')
 
+class EngineTypeAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+class WorkOrderStatusAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 
 admin.site.register(Addresses, AddressAdmin)
@@ -137,3 +142,5 @@ admin.site.register(VehiclesMeta, VehiclesMetaAdmin)
 admin.site.register(Vendors, VendorsAdmin)
 admin.site.register(WorkOrders, WorkOrderAdmin)
 admin.site.register(ServiceReminder, ServiceReminderAdmin)
+admin.site.register(EngineType, EngineTypeAdmin)
+admin.site.register(WorkOrderStatus, WorkOrderStatusAdmin)

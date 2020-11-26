@@ -15,7 +15,7 @@ right: 0;
         <div class="col-12 col-md-12">
           <div class="box box-primary">
                 <div class="box-header with-border container">
-                    <h3 style="float:left" class="box-title float-left">Add Vehicle</h3>
+                    <h3 style="float:left" class="box-title float-left">Add WorkOrder</h3>
                   </div>
         </div>
       </div>
@@ -40,85 +40,45 @@ right: 0;
                 <div class="container">
                   <div class="row">
                         <div class="col-6">
-                            {{ form.vehicles_user | as_crispy_field }}
+                            {{ form.created_on | as_crispy_field }}
                         </div>
                         <div class="col-6">
-                            {{ form.make | as_crispy_field }}
+                            {{ form.required_by | as_crispy_field }}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            {{ form.model | as_crispy_field }}
+                            {{ form.wo_vehicle | as_crispy_field }}
                         </div>
                         <div class="col-6">
-                            {{ form.type | as_crispy_field }}
+                            {{ form.wo_vendor | as_crispy_field }}
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            {{ form.year | as_crispy_field }}
+                            {{ form.price | as_crispy_field }}
                         </div>
                         <div class="col-6">
-                            {{ form.lic_exp_date | as_crispy_field }}
+                            {{ form.meter | as_crispy_field }}
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            {{ form.reg_exp_date | as_crispy_field }}
+                            {{ form.status | as_crispy_field }}
                         </div>
                         <div class="col-6">
-                            {{ form.engine_type | as_crispy_field }}
+                            {{ form.description | as_crispy_field }}
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            {{ form.horse_power | as_crispy_field }}
-                        </div>
-                        <div class="col-6">
-                            {{ form.color | as_crispy_field }}
+                        <div class="col-12">
+                            {{ form.note | as_crispy_field }}
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            {{ form.vin | as_crispy_field }}
-                        </div>
-                        <div class="col-6">
-                            {{ form.license_plate | as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            {{ form.mileage | as_crispy_field }}
-                        </div>
-                        <div class="col-6">
-                            {{ form.in_service | as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            {{ form.initial_mileage | as_crispy_field }}
-                        </div>
-                        
-                        <div class="col-4">
-                            {{ form.group | as_crispy_field }}
-                        </div>
-
-                        <div class="col-4">
-                            {{ form.vehicle_image | as_crispy_field }}
-                        </div>
-                    </div>
-                
-                      <!-- {% for each in form %}
-                      <div class="col-12">
-                        {{ each | as_crispy_field }}
-                      </div>
-                      {% endfor %} -->
+                    
                     </div>  
                        
                     <div class="col-12">

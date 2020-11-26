@@ -6,7 +6,6 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('nat', views.nat, name="nat"),
     path('', views.home, name="home"),
     path('adduser', views.adduser, name="adduser"),
     path('login', views.login, name = "login"),
@@ -49,6 +48,21 @@ urlpatterns = [
     path('settings-fare', views.fare_settings, name="fare_settings"),
     path('settings-expense', views.expense_categories, name='expense_categories'),
     path('settings-income', views.income_categories, name="income_categories"), 
+
+    path('add-vehicle', views.add_vehicle , name="add_vehicle"),
+    path('edit-vehicle/<int:id>', views.edit_vehicle , name="edit_vehicle"),
+    path('delete-vehicle/<int:id>', views.delete_vehicle, name="delete_vehicle"),
+
+
+    path('add-vehicle-group', views.add_vehicle_group, name="add_vehicle_group"),
+    path('update-vehicle-group/<int:id>', views.update_vehicle_group, name = "update_vehicle_group"),
+    path('delete-vehicle-group/<int:id>', views.delete_vehicle_group, name="delete_vehicle_group"),
+
+
+    path('add-workorder', views.add_vehicle_group, name="add_vehicle_group"),
+    path('update-workorder/<int:id>', views.update_workorder, name = "update_workorder"),
+    path('delete-workorder/<int:id>', views.delete_workorder, name="delete_workorder"),
+
 ]
 
 

@@ -126,6 +126,46 @@ def manage_vehicles(request):
     data = Vehicles.objects.all()
     return render(request, "transport/demo/pages/vehicles/index.html", {'data':data})
 
+
+@login_required(login_url='login')
+def add_vehicle(request):
+    if request.method == "GET": 
+        form = VehicleForm()
+        return render(request, 'transport/demo/pages/vehicles/create-vehicle.html', {'form': form})
+    else:
+        form = VehicleForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_vehicles')
+        else:
+            print( form.errors )
+            return render(request, 'transport/demo/pages/vehicles/create-vehicle.html', {'form': form})
+            
+
+@login_required(login_url='login')
+def edit_vehicle(request, id):
+    if request.method == "GET":
+        vehicle = Vehicles.objects.get(pk=id)
+        form = VehicleForm(instance=vehicle)
+        return render(request, 'transport/demo/pages/vehicles/create-vehicle.html', {'form': form})
+    else:
+        vehicle = Vehicles.objects.get(pk=id)
+        form = VehicleForm(request.POST, instance=vehicle)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_vehicles')
+        else:
+            return render(request, 'transport/demo/pages/vehicles/create-vehicle.html', {'form': form})
+
+
+@login_required(login_url='login')
+def delete_vehicle(request, id):
+    vehicle = Vehicles.objects.get(pk=id)
+    vehicle.delete()
+    return redirect('manage_vehicles')
+
+
+
 @login_required(login_url='login')
 def vehicles_group(request):
     data = VehicleGroup.objects.all()
@@ -139,6 +179,43 @@ def vehicles_group(request):
         'user_total': user_total,
     }
     return render(request, "transport/demo/pages/vehicles/vehiclesgroup.html", context)
+
+
+@login_required(login_url="login")
+def add_vehicle_group(request):
+    if request.method == "GET":
+        form = VehicleGroupForm()
+        return render(request, "transport/demo/pages/vehicles/create-vehicle-group.html", {'form': form})
+    else:
+        form = VehicleGroupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('vehicles_group')
+        else:
+            return render(request, 'transport/demo/pages/vehicles/create-vehicle-group.html', {'form': form})
+
+
+@login_required(login_url='login')
+def update_vehicle_group(request, id):
+    vehicle_group = VehicleGroup.objects.get(pk=id)
+    if request.method == 'GET':
+        form = VehicleGroupForm(instance=vehicle_group)
+        return render(request, 'transport/demo/pages/vehicles/create-vehicle-group.html', {'form': form})
+    else:
+        form = VehicleGroupForm(request.POST, instance=vehicle_group)
+        if form.is_valid():
+            form.save()
+            return redirect('vehicles_group')
+        else:
+            return render(request, 'transport/demo/pages/vehicles/vehiclegroup.html', {'form': form})
+
+
+@login_required(login_url='login')
+def delete_vehicle_group(request, id):
+    vehicle_group = VehicleGroup.objects.get(pk=id)
+    vehicle_group.delete()
+    return redirect('vehicles_group')
+
 
 @login_required(login_url='login')
 def manage_income(request):
@@ -220,14 +297,49 @@ def manage_vendor(request):
     return render(request, "transport/demo/pages/vendors/index.html", {'data':data})
 
 
-@login_required(login_url='login')
-def add_workorder(request):
-    pass
 
 @login_required(login_url='login')
 def manage_workorder(request):
     data = WorkOrders.objects.all()
     return render(request, "transport/demo/pages/workorders/manageworkorders.html", {'data':data})
+
+
+@login_required(login_url='login')
+def add_workorder(request):
+    if request.method == "GET":
+        form = WorkOrderForm()
+        return render(request, 'transport/demo/pages/workorders/create-workorder.html', {'form': form})
+    else:
+        form = WorkOrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_workorder')
+        else:
+            return render(request, 'transport/demo/pages/workorders/create-workorder.html', {'form': form})
+
+
+@login_required(login_url='login')
+def update_workorder(request, id):
+    workorder = WorkOrders.objects.get(pk=id)
+    if request.method == POST:
+        form = WorkOrderForm(request.POST, instance=workorder)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_workorder')
+        else:
+            return render(request, 'transport/demo/pages/workorders/create-workorder.html', {'form': form})
+    else:
+        form = WorkOrderForm(request.POST)
+        return render(request, 'transport/demo/pages/workorders/create-workorder.html', {'form': form})
+
+
+
+@login_required(login_url='login')
+def delete_workorder(request, id):
+    workorder = WorkOrders.objects.get(pk=id)
+    workorder.delete()
+    return redirect('manage_workorders')
+    
 
 
 @login_required(login_url='login')

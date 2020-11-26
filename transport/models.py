@@ -576,17 +576,23 @@ class UsersMeta(models.Model):
 
 
 class VehicleGroup(models.Model):
-    vehiclegroup_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vehiclegroup", null=True)
+    # vehiclegroup_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vehiclegroup", null=True)
     name = models.CharField(max_length=50, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    description = models.CharField(max_length=500, blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add = True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now = True, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'vehicle_group'
+
+    def __str__(self):
+        return self.name
+
+class EngineType(models.Model):
+    name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -602,18 +608,18 @@ class Vehicles(models.Model):
     lic_exp_date = models.DateField(blank=True, null=True)
     reg_exp_date = models.DateField(blank=True, null=True)
     vehicle_image = models.ImageField(blank=True, null=True)
-    engine_type = models.CharField(max_length=255, blank=True, null=True)
+    engine_type = models.ForeignKey(EngineType, on_delete=models.CASCADE, null=True)
     horse_power = models.CharField(max_length=255, blank=True, null=True)
     color = models.CharField(max_length=255, blank=True, null=True)
     vin = models.CharField(max_length=255, blank=True, null=True)
     license_plate = models.CharField(max_length=255)
     mileage = models.IntegerField(blank=True, null=True)
-    in_service = models.IntegerField(blank=True, null=True)
+    in_service = models.BooleanField(blank=True, null=True)
     # user_id = models.IntegerField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True ,blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
-    int_mileage = models.IntegerField(blank=True, null=True)
+    initial_mileage = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -668,15 +674,23 @@ class Vendors(models.Model):
         return self.name
 
 
+class WorkOrderStatus(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+
 class WorkOrders(models.Model):
-    workorder_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="workorders", null=True)
+    # workorder_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="workorders", null=True)
     created_on = models.DateField(blank=True, null=True)
     required_by = models.DateField(blank=True, null=True)
-    vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicle_id", blank=True, null=True)
-    vendor_id = models.ForeignKey(Vendors, on_delete=models.CASCADE, related_name="vendor_id", blank=True, null=True)
+    wo_vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, blank=True, null=True)
+    wo_vendor = models.ForeignKey(Vendors, on_delete=models.CASCADE, blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    status = models.ForeignKey(WorkOrderStatus, on_delete=models.CASCADE)
+    description = models.CharField(max_length=400, blank=True, null=True)
     meter = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
@@ -691,9 +705,9 @@ class WorkOrders(models.Model):
 
 
 class Notes(models.Model):
-    notes_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True)
-    vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicles", blank=True, null=True)
-    customer_id = models.IntegerField(blank=True, null=True)
+    note_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True)
+    note_vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicles", blank=True, null=True)
+    note_customer = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     submitted_on = models.DateField(blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
@@ -711,8 +725,8 @@ class Notes(models.Model):
 
 class ServiceReminder(models.Model):
     # servicereminder_user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="servicereminders", null=True)
-    vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicleservice" ,blank=True, null=True)
-    service_id = models.ForeignKey(ServiceItems, on_delete=models.CASCADE, related_name="service",blank=True, null=True)
+    sr_vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicleservice" ,blank=True, null=True)
+    sr_service = models.ForeignKey(ServiceItems, on_delete=models.CASCADE, related_name="service",blank=True, null=True)
     last_date = models.DateField(blank=True, null=True)
     last_meter = models.IntegerField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
@@ -724,4 +738,4 @@ class ServiceReminder(models.Model):
         db_table = 'service_reminder'
 
     def __str__(self):
-        return str(self.vehicle_id)
+        return str(self.sr_vehicle)
