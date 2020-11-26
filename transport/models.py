@@ -647,23 +647,31 @@ class VehiclesMeta(models.Model):
     def __str__(self):
         return self.key
 
+
+class VendorType(models.Model):
+    type = models.CharField(max_length=15, unique=True)
+
+    def __str__(self):
+        return self.type
+
+
 class Vendors(models.Model):
-    vendors_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vendors", null=True)
+    # vendors_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vendors", null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     photo = models.ImageField(blank=True, null=True)
-    type = models.CharField(max_length=255, blank=True, null=True)
+    type = models.ForeignKey(VendorType, on_delete=models.CASCADE, blank=True, null=True)
     website = models.CharField(max_length=255, blank=True, null=True)
-    custom_type = models.CharField(max_length=255, blank=True, null=True)
+    # custom_type = models.CharField(max_length=255, blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
     address1 = models.CharField(max_length=255, blank=True, null=True)
     address2 = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
     province = models.CharField(max_length=255, blank=True, null=True)
-    email = models.CharField(max_length=255, blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
+    deleted_at = models.DateTimeField(auto_now = True, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add = True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now = True, blank=True, null=True)
 
     class Meta:
         managed = True

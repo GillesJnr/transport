@@ -288,13 +288,45 @@ def fuel_history(request):
 
 @login_required(login_url='login')
 def add_vendor(request):
-    pass
+    if request.method == "GET":
+        form = VendorForm()
+        return render(request, "transport/demo/pages/vendors/create-vendor.html", {'form':form})
+    else:
+        form = VendorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_vendor')
+        else: 
+            return render(request, "transport/demo/pages/vendors/create-vendor.html", {'form':form})
 
 
 @login_required(login_url='login')
 def manage_vendor(request):
     data = Vendors.objects.all()
     return render(request, "transport/demo/pages/vendors/index.html", {'data':data})
+
+
+@login_required(login_url='login')
+def update_vendor(request, id):
+    vendor = Vendors.objects.get(pk=id)
+    if request.method == "GET":
+        form = VendorForm(instance=vendor)
+        return render(request, "transport/demo/pages/vendors/create-vendor.html", {'form': form})
+    else:
+        form = VendorForm(request.POST, request.FILES, instance=vendor)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_vendor')
+        else:
+            return render(request, "transport/demo/pages/vendors/create-vendor.html", {'form': form})
+
+
+
+@login_required(login_url='login')
+def delete_vendor(request, id):
+    vendor = Vendors.objects.get(pk=id)
+    vendor.delete()
+    return redirect('manage_vendor')
 
 
 

@@ -59,9 +59,17 @@ urlpatterns = [
     path('delete-vehicle-group/<int:id>', views.delete_vehicle_group, name="delete_vehicle_group"),
 
 
-    path('add-workorder', views.add_vehicle_group, name="add_vehicle_group"),
+    path('add-workorder', views.add_workorder, name="add_workorder"),
     path('update-workorder/<int:id>', views.update_workorder, name = "update_workorder"),
     path('delete-workorder/<int:id>', views.delete_workorder, name="delete_workorder"),
+
+
+    path('add-vendor', views.add_vendor, name="add_vendor"),
+    path('update-vendor/<int:id>', views.update_vendor, name = "update_vendor"),
+    path('delete-vendor/<int:id>', views.delete_vendor, name="delete_vendor"),
+
+
+
 
 ]
 

@@ -86,3 +86,15 @@ class WorkOrderForm(ModelForm):
         super(WorkOrderForm, self).__init__(*args, **kwargs)
         self.fields['wo_vendor'].empty_label = 'Select Vendor'
         self.fields['wo_vehicle'].empty_label = 'Select Vehicle'
+        self.fields['status'].empty_label = 'Select Status'
+
+
+class VendorForm(ModelForm):
+    class Meta:
+        model = Vendors
+        fields = '__all__'
+        exclude = ('created_at', 'updated_at', 'deleted_at')
+
+    def __init__(self, *args, **kwargs):
+        super(VendorForm, self).__init__(*args, **kwargs)
+        self.fields['type'].empty_label = 'Select Type'

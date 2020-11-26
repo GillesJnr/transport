@@ -64,6 +64,9 @@ class IncomeAdmin(admin.ModelAdmin):
 class IncomeCatAdmin(admin.ModelAdmin):
     list_display = ('name','user_id','type', 'created_at')
 
+class VendorTypeAdmin(admin.ModelAdmin):
+    list_display = ('type', )
+
 
 class NotesAdmin(admin.ModelAdmin):
     list_display = ('note','note_vehicle','status','submitted_on','note_customer')	
@@ -144,3 +147,4 @@ admin.site.register(WorkOrders, WorkOrderAdmin)
 admin.site.register(ServiceReminder, ServiceReminderAdmin)
 admin.site.register(EngineType, EngineTypeAdmin)
 admin.site.register(WorkOrderStatus, WorkOrderStatusAdmin)
+admin.site.register(VendorType, VendorTypeAdmin)
