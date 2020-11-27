@@ -63,9 +63,9 @@ class Addresses(models.Model):
     addresses_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses", null=True)
     customer_id = models.IntegerField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -96,9 +96,9 @@ class ApiSettings(models.Model):
     apisettings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="apisettings", null=True)
     key_name = models.CharField(max_length=255, blank=True, null=True)
     key_value = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -117,9 +117,9 @@ class BookingIncome(models.Model):
     bookingincome_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookingincomes", null=True)
     booking_id = models.IntegerField(blank=True, null=True)
     income_id = models.IntegerField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -146,9 +146,9 @@ class Bookings(models.Model):
     travellers = models.IntegerField()
     status = models.IntegerField()
     payment = models.IntegerField()
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -165,9 +165,9 @@ class BookingsMeta(models.Model):
     type = models.CharField(max_length=255)
     key = models.CharField(max_length=255)
     value = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -227,8 +227,8 @@ class DriverVehicle(models.Model):
     drivervehicle_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="drivervehicles", null=True)
     vehicle_id = models.IntegerField(blank=True, null=True)
     driver_id = models.IntegerField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -243,9 +243,9 @@ class EmailContent(models.Model):
     emailcontent_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="emailcontents", null=True)
     key = models.CharField(max_length=255, blank=True, null=True)
     value = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -264,9 +264,9 @@ class Expense(models.Model):
     expense_type = models.IntegerField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -281,9 +281,9 @@ class ExpenseCat(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     type = models.CharField(max_length=5, blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -297,9 +297,9 @@ class FareSettings(models.Model):
     # faresettings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="faresettings", null=True)
     key_name = models.CharField(max_length=255, blank=True, null=True)
     key_value = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -328,9 +328,9 @@ class Fuel(models.Model):
     consumption = models.IntegerField(blank=True, null=True)
     complete = models.IntegerField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -350,9 +350,9 @@ class Income(models.Model):
     income_cat = models.IntegerField(blank=True, null=True)
     mileage = models.IntegerField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -368,9 +368,9 @@ class IncomeCat(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     type = models.CharField(max_length=5, blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -387,9 +387,9 @@ class Maintanance(models.Model):
     vehicle_id = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     cost = models.FloatField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -401,9 +401,9 @@ class Message(models.Model):
     fcm_id = models.CharField(max_length=255, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     message = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -425,9 +425,9 @@ class Mileage(models.Model):
     vehicle_id = models.IntegerField(blank=True, null=True)
     mileage = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -447,8 +447,8 @@ class Notifications(models.Model):
     notifiable_id = models.BigIntegerField()
     data = models.TextField()
     read_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -464,7 +464,7 @@ class PasswordResets(models.Model):
     passwordresets_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="passwordresets", null=True)
     email = models.CharField(max_length=255)
     token = models.CharField(max_length=255)
-    created_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
 
     class Meta:
         managed = True
@@ -474,9 +474,9 @@ class PasswordResets(models.Model):
 class Reasons(models.Model):
     reasons_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reasons", null=True)
     reason = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -495,9 +495,9 @@ class Reviews(models.Model):
     driver_id = models.IntegerField(blank=True, null=True)
     ratings = models.FloatField(blank=True, null=True)
     review_text = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -508,23 +508,35 @@ class Reviews(models.Model):
     def __str__(self):
         return self.review_text
 
+SERVICECHOICES =(
+    ('On','On'),
+    ('Off','Off'),
+)
+
+SERVICEUNITCHOICES = (
+    ('day(s)', 'day(s)'),
+    ('week(s)', 'week(s)'),
+    ('month(s)', 'month(s)'),
+    ('year(s)', 'year(s)'),
+)
+
 
 class ServiceItems(models.Model):
     # serviceitem_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="serviceitems", null=True)
     description = models.TextField(blank=True, null=True)
-    time_interval = models.CharField(max_length=255, blank=True, null=True)
+    time_interval = models.CharField(choices=SERVICECHOICES, default='off', max_length=3, blank=True, null=True)
     overdue_time = models.IntegerField(blank=True, null=True)
-    overdue_unit = models.CharField(max_length=255, blank=True, null=True)
-    meter_interval = models.CharField(max_length=255, blank=True, null=True)
+    overdue_unit = models.CharField(choices=SERVICEUNITCHOICES, max_length=255, blank=True, null=True)
+    meter_interval = models.CharField(choices=SERVICECHOICES, default='off', max_length=3, blank=True, null=True)
     overdue_meter = models.IntegerField(blank=True, null=True)
-    show_time = models.CharField(max_length=255, blank=True, null=True)
+    show_time = models.CharField(choices=SERVICECHOICES, max_length=255, blank=True, null=True)
     duesoon_time = models.IntegerField(blank=True, null=True)
-    duesoon_unit = models.CharField(max_length=255, blank=True, null=True)
-    show_meter = models.CharField(max_length=255, blank=True, null=True)
+    duesoon_unit = models.CharField(choices=SERVICEUNITCHOICES, max_length=255, blank=True, null=True)
+    show_meter = models.CharField(choices=SERVICECHOICES, max_length=255, blank=True, null=True)
     duesoon_meter = models.IntegerField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -543,9 +555,9 @@ class Settings(models.Model):
     label = models.CharField(max_length=255)
     name = models.CharField(unique=True, max_length=255)
     value = models.TextField()
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -563,9 +575,9 @@ class UsersMeta(models.Model):
     type = models.CharField(max_length=255)
     key = models.CharField(max_length=255)
     value = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -580,7 +592,7 @@ class VehicleGroup(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
     note = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add = True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now = True, blank=True, null=True)
 
@@ -618,7 +630,7 @@ class Vehicles(models.Model):
     # user_id = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True ,blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
     initial_mileage = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -636,9 +648,9 @@ class VehiclesMeta(models.Model):
     type = models.CharField(max_length=255)
     key = models.CharField(max_length=255)
     value = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -701,9 +713,9 @@ class WorkOrders(models.Model):
     description = models.CharField(max_length=400, blank=True, null=True)
     meter = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -712,16 +724,24 @@ class WorkOrders(models.Model):
         verbose_name_plural = 'Work Orders'
 
 
+NOTE_CHOICES = (
+    ('Pending', 'Pending'),
+    ('Processing', 'Processing'),
+    ('Completed', 'Completed'),
+    ('Hold', 'Hold'),
+)
+
+
 class Notes(models.Model):
-    note_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True)
+    in_charge = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="notes", null=True)
     note_vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicles", blank=True, null=True)
-    note_customer = models.IntegerField(blank=True, null=True)
+    # note_customer = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
-    submitted_on = models.DateField(blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    submitted_on = models.DateField()
+    status = models.CharField(max_length=255, choices=NOTE_CHOICES, default='Pending')
+    deleted_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
         managed = True
@@ -735,15 +755,16 @@ class ServiceReminder(models.Model):
     # servicereminder_user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="servicereminders", null=True)
     sr_vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicleservice" ,blank=True, null=True)
     sr_service = models.ForeignKey(ServiceItems, on_delete=models.CASCADE, related_name="service",blank=True, null=True)
-    last_date = models.DateField(blank=True, null=True)
-    last_meter = models.IntegerField(blank=True, null=True)
-    deleted_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    last_date = models.DateField()
+    last_meter = models.IntegerField()
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'service_reminder'
 
     def __str__(self):
-        return str(self.sr_vehicle)
+        return self.sr_vehicle.make
+    

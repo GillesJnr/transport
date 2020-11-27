@@ -37,9 +37,6 @@ urlpatterns = [
     path('manage-workorders', views.manage_workorder, name="manage_workorder"),
     path('add-note', views.add_note , name="add_note"),
     path('manage-notes', views.manage_note, name="manage_note"),
-    path('add-reminder', views.add_reminder, name="add_reminder"),
-    path('manage-reminder', views.manage_reminder, name="manage_reminder"),
-    path('reminder-service-item', views.service_item, name="service_item"),
     path('settings-general', views.general_settings, name="general_settings"),
     path('settings-api', views.api_settings, name="api_settings"),
     path('settings-reason', views.cancellation_reason, name="cancellation_reason"),
@@ -69,7 +66,21 @@ urlpatterns = [
     path('delete-vendor/<int:id>', views.delete_vendor, name="delete_vendor"),
 
 
+    path('add-note', views.add_note, name="add_note"),
+    path('update-note/<int:id>', views.update_note, name = "update_note"),
+    path('delete-note/<int:id>', views.delete_note, name="delete_note"),
 
+
+    path('add-reminder', views.add_reminder, name="add_reminder"),
+    path('manage-reminder', views.manage_reminder, name="manage_reminder"),
+    path('update-reminder/<int:id>', views.update_reminder, name="update_reminder"),
+    path('delete-reminder/<int:id>', views.delete_reminder, name="delete_reminder"),
+
+
+    path('reminder-service-item', views.service_item, name="service_item"),
+    path('add-service-item', views.add_service_item, name="add_service_item"),
+    path('update-service-item', views.update_service_item, name="update_service_item"),
+    path('delete-service-item', views.delete_service_item, name="delete_service_item"),
 
 ]
 

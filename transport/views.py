@@ -5,9 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import (login as auth_login,  authenticate, logout as auth_logout)
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from datetime import date
+from datetime import date, timedelta
 from django.db.models import Count, Sum, Avg
-from datetime import timedelta
 from .forms import *
 
 
@@ -376,16 +375,44 @@ def delete_workorder(request, id):
 
 @login_required(login_url='login')
 def add_note(request):
-    pass
+    if request.method == "GET":
+        form = NoteForm()
+        return render(request, "transport/demo/pages/notes/create-note.html", {'form': form})
+    else:
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_note')
+        return render(request, 'transport/demo/pages/notes/create-note.html', {'form': form})
+
+
+@login_required(login_url='login')
+def update_note(request, id):
+    note = Notes.objects.get(pk=id)
+    if request.method == "POST":
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_note')
+        else:
+            return render(request, 'transport/demo/pages/notes/create-note.html', {'form': form})
+    else:
+        form = NoteForm(instance=note)
+        return render(request, 'transport/demo/pages/notes/create-note.html', {'form': form})
+
+
+@login_required(login_url='login')
+def delete_note(request, id):
+    note = Notes.objects.get(pk=id)
+    note.delete()
+    return redirect('manage_note')
+
+
 
 @login_required(login_url='login')
 def manage_note(request):
     data = Notes.objects.all()
     return render(request, "transport/demo/pages/notes/index.html", {'data':data})
-
-@login_required(login_url='login')
-def add_reminder(request):
-    pass
 
 
 @login_required(login_url='login')
@@ -393,17 +420,74 @@ def manage_reminder(request):
     data = ServiceReminder.objects.all()
     time_list = []
     for da in data:
-        time_list.append(da.last_date + timedelta(days=da.service_id.overdue_time))
+        time_list.append(da.last_date + timedelta(days=int(da.sr_service.overdue_time)))
     context = {
         'data': data,
         'time_list': time_list,
     }
     return render(request, "transport/demo/pages/service-reminder/index.html", context)
 
+
+@login_required(login_url='login')
+def add_reminder(request):
+    if request.method == "GET":
+        form = ReminderForm()
+        items = ServiceItems.objects.all()
+        return render(request,  "transport/demo/pages/service-reminder/create-reminder.html", {
+            'form': form,
+            'items': items,
+            })
+    else:
+        form = ReminderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_reminder')
+        else:
+            return render(request, "transport/demo/pages/service-reminder/create-reminder.html", {'form': form})
+
+
+@login_required(login_url='login')
+def update_reminder(request, id):
+    reminder = ServiceReminder.objects.get(pk=id)
+    if request.method == "GET":
+        form = ReminderForm(instance=reminder)
+        return render(request,  "transport/demo/pages/service-reminder/create-reminder.html", {'form': form})
+    else:
+        form = ReminderForm(request.POST, instance=reminder)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_reminder')
+        else:
+            return render(request,  "transport/demo/pages/service-reminder/create-reminder.html", {'form': form})
+
+
+
+@login_required(login_url='login')
+def delete_reminder(request, id):
+    reminder = ServiceReminder.objects.get(pk=id)
+    reminder.delete()
+    return redirect('manage_reminder')
+
+
 @login_required(login_url='login')
 def service_item(request):
     data = ServiceItems.objects.all()
     return render(request, "transport/demo/pages/service-reminder/service-items.html", {'data': data})
+
+
+@login_required(login_url='login')
+def add_service_item(request):
+    pass
+
+
+@login_required(login_url='login')
+def update_service_item(request, id):
+    pass
+
+
+@login_required(login_url='login')
+def delete_service_item(request, id):
+    pass
 
 @login_required(login_url='login')
 def general_settings(request):

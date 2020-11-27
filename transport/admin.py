@@ -69,7 +69,7 @@ class VendorTypeAdmin(admin.ModelAdmin):
 
 
 class NotesAdmin(admin.ModelAdmin):
-    list_display = ('note','note_vehicle','status','submitted_on','note_customer')	
+    list_display = ('note','note_vehicle','status','submitted_on','in_charge')	
 
 class NotificationsAdmin(admin.ModelAdmin):
     list_display = ('id','type','notifiable_type','data','notifiable_id','created_at', 'read_at')					

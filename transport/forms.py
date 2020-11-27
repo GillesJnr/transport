@@ -98,3 +98,39 @@ class VendorForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(VendorForm, self).__init__(*args, **kwargs)
         self.fields['type'].empty_label = 'Select Type'
+
+
+class NoteForm(ModelForm):
+    class Meta:
+        model = Notes
+        fields = '__all__'
+        exclude = ('created_at', 'updated_at', 'deleted_at')
+        widgets = {
+            'submitted_on' : DateInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(NoteForm, self).__init__(*args, **kwargs)
+        self.fields['in_charge'].empty_label = 'Choose Person in Charge'
+        self.fields['in_charge'].label = 'Assign Person'
+        self.fields['note_vehicle'].empty_label = 'Select Vehicle'
+        self.fields['status'].empty_label = 'Select Status'
+        self.fields['in_charge'].queryset = Users.objects.all().exclude(user_type='C')
+
+
+class ReminderForm(ModelForm):
+    class Meta:
+        model = ServiceReminder
+        fields = '__all__'
+        exclude = ('created_at','deleted_at','updated_at')
+        widgets = {
+             'last_date': DateInput()
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(ReminderForm, self).__init__(*args, **kwargs)
+        self.fields['sr_vehicle'].empty_label = 'Select Vehicle'
+        self.fields['sr_vehicle'].label = 'Select Vehicle'
+        self.fields['sr_service'].label = 'Select Service'
+        self.fields['sr_service'].empty_label = 'Select Service'
+    
