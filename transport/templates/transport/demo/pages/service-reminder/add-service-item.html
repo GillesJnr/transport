@@ -1,0 +1,190 @@
+{% extends 'transport/demo/layout.html' %}
+{% load crispy_forms_tags %}
+{% block customcss %}
+<style type="text/css">
+.custom{
+min-width: 50px;
+left:-149px !important;
+right: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="row mdc-layout-grid__cell">
+        <div class="col-12 col-md-12">
+          <div class="box box-primary">
+                <div class="box-header with-border container">
+                    <h3 style="float:left" class="box-title float-left">Add Vehicle</h3>
+                  </div>
+        </div>
+      </div>
+       
+
+  <div class="col-12 col-md-12">
+        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12" style="margin-left:30px;">
+            <div class="mdc-card p-0">
+                {% if message in messages %}
+                <div class="alert alert-danger">
+                <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                </div>
+                {% endif %}
+            
+            <form method="POST" class="mt-5 ml-2 mb-5" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="container">
+            
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">
+                          create_service_item
+                          </h3>
+                        </div>
+        
+                        <div class="box-body">                           
+                        
+                          <div class="row">
+                            <div class="col-md-12">
+                                {{ form.description | as_crispy_field }}                                   
+                                  <br/>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                               <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">
+                                  overdue reminder_settings
+                                </h3>
+                                </div>
+                                <div class="box-body">
+        
+                                   Time Interval
+        
+                                      <div class="row">
+                                        <div class="col-md-3">
+                                          <label class="switch">
+                                            <input type="checkbox" name="chk1">
+                                            <span class="slider round"></span>
+                                          </label>
+                                        </div>
+                                        <div class="form-group col-md-3" >
+                                          <input type="number" name="time1" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                          <select id="interval" name="interval1" class="form-control" >
+                                            <option value="day(s)"> days</option>
+                                            <option value="week(s)"> weeks</option>
+                                            <option value="month(s)"> months</option>
+                                            <option value="year(s)"> years</option>
+                                          </select>
+                                        </div>
+                                      </div>
+        
+        
+        
+                                     meter_interval
+        
+                                      <div class="row">
+                                        <div class="col-md-3">
+                                          <label class="switch">
+                                            <input type="checkbox" name="chk2">
+                                            <span class="slider round"></span>
+                                          </label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                          <div class="input-group date">
+                                          <div class="input-group-addon">dis_format</div>
+                                          <input type="number" name="meter1" class="form-control">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-3">
+        
+                                        </div>
+                                      </div>
+        
+                                </div>
+                              </div>
+                            </div>
+        
+                            <div class="col-md-6">
+                               <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">
+                                 due_soon reminder_settings
+                                </h3>
+                                </div>
+                                <div class="box-body">
+        
+                                     show_reminder_time
+                                     <div class="row">
+                                        <div class="col-md-3">
+                                          <label class="switch">
+                                            <input type="checkbox" name="chk3">
+                                            <span class="slider round"></span>
+                                          </label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                          <input type="number" name="time2" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                          <select id="interval" name="interval2" class="form-control" >
+                                            <option value="day(s)"> days</option>
+                                            <option value="week(s)"> weeks</option>
+                                            <option value="month(s)"> months</option>
+                                            <option value="year(s)"> years</option>
+                                          </select>
+                                        </div>
+                                      </div>
+        
+                                    show_reminder_meter
+        
+                                      <div class="row">
+                                        <div class="col-md-3">
+                                          <label class="switch">
+                                            <input type="checkbox" name="chk4">
+                                            <span class="slider round"></span>
+                                          </label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                          <div class="input-group date">
+                                          <div class="input-group-addon">dis_format</div>
+                                          <input type="number" name="meter2" class="form-control">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-3">
+        
+                                        </div>
+                                      </div>
+        
+        
+                                </div>
+                              </div>
+                
+                      <!-- {% for each in form %}
+                      <div class="col-12">
+                        {{ each | as_crispy_field }}
+                      </div>
+                      {% endfor %} -->
+                    </div>  
+                       
+                    <div class="col-12">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+
+                </div>
+                
+            </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

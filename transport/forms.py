@@ -133,4 +133,15 @@ class ReminderForm(ModelForm):
         self.fields['sr_vehicle'].label = 'Select Vehicle'
         self.fields['sr_service'].label = 'Select Service'
         self.fields['sr_service'].empty_label = 'Select Service'
+
+
+
+class ServiceItemForm(ModelForm):
+    class Meta:
+        model = ServiceItems
+        fields = '__all__'
+        exclude = ('created_at','updated_at','deleted_at')
+
+
+        
     

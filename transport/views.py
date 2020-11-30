@@ -421,9 +421,13 @@ def manage_reminder(request):
     time_list = []
     for da in data:
         time_list.append(da.last_date + timedelta(days=int(da.sr_service.overdue_time)))
+
+    my_list = zip(data, time_list)
+
     context = {
         'data': data,
         'time_list': time_list,
+        'my_list': my_list,
     }
     return render(request, "transport/demo/pages/service-reminder/index.html", context)
 
@@ -477,17 +481,36 @@ def service_item(request):
 
 @login_required(login_url='login')
 def add_service_item(request):
-    pass
+    if request.method == "GET":
+        form = ServiceItemForm()
+        return render(request, "transport/demo/pages/service-reminder/add-service-item.html", {'form': form})
+    else:
+        form = ServiceItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('service_item')
+        else:
+            return render(request, "transport/demo/pages/service-reminder/add-service-item.html", {'form': form})
 
 
 @login_required(login_url='login')
 def update_service_item(request, id):
-    pass
+    item = ServiceItems.objects.get(pk=id)
+    if request.method == "GET":
+        form = ServiceItemForm(instance = item)
+        return render(request, "transport/demo/pages/service-reminder/add-service-item.html", {'form': form})
+    else:
+        form = ServiceItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save
+            return redirect('service_item')
 
 
 @login_required(login_url='login')
 def delete_service_item(request, id):
-    pass
+    item = ServiceItems.objects.get(pk=id)
+    item.delete()
+    return redirect('service_item')
 
 @login_required(login_url='login')
 def general_settings(request):

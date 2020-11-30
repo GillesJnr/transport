@@ -49,3 +49,7 @@
 textarea#id_note.textarea.form-control{
     height: 120px !important;
 }
+
+textarea#id_description.textarea.form-control{
+    height: 30px !important;
+}
