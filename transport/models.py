@@ -341,46 +341,6 @@ class Fuel(models.Model):
         return str (self.reference)
 
 
-class Income(models.Model):
-    income_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomes", null=True)
-    vehicle_id = models.IntegerField(blank=True, null=True)
-    income_id = models.IntegerField(blank=True, null=True)
-    amount = models.FloatField()
-    user_id = models.IntegerField(blank=True, null=True)
-    income_cat = models.IntegerField(blank=True, null=True)
-    mileage = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'income'
-
-
-    def __str__(self):
-        return str (self.income_user)
-
-
-class IncomeCat(models.Model):
-    incomecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomecats", null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=5, blank=True, null=True)
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'income_cat'
-
-
-    def __str__(self):
-        return self.name
-
-
 class Maintanance(models.Model):
     maintenance_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="maintanance", null=True)
     service_id = models.IntegerField(blank=True, null=True)
@@ -768,3 +728,42 @@ class ServiceReminder(models.Model):
     def __str__(self):
         return self.sr_vehicle.make
     
+
+class IncomeCat(models.Model):
+    incomecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomecats", null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    # user_id = models.IntegerField(blank=True, null=True)
+    type = models.CharField(max_length=5, blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(auto_now = True, blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'income_cat'
+
+
+    def __str__(self):
+        return self.name
+
+
+class Income(models.Model):
+    income_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomes", null=True)
+    vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicle", null=True)
+    income_type = models.ForeignKey(IncomeCat, on_delete=models.CASCADE, related_name="income_category", null=True)
+    amount = models.FloatField()
+    # user_id = models.IntegerField(blank=True, null=True)
+    # income_cat = models.IntegerField(blank=True, null=True)
+    mileage = models.IntegerField(blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(auto_now = True, blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'income'
+
+
+    def __str__(self):
+        return str (self.income_user)

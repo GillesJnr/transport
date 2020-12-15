@@ -15,7 +15,7 @@ urlpatterns = [
     path('drivers', views.view_drivers, name="view_drivers"),
     path('vehicles', views.manage_vehicles, name="manage_vehicles"),
     path('vehicles-group', views.vehicles_group, name="vehicles_group"),    
-    path('transactions-income', views.manage_income, name="manage_income"),
+    
     path('transactions-expense', views.manage_expense, name="manage_expense"),
     path('newbooking', views.new_booking, name="new_booking"),
     path('managebooking', views.manage_booking, name="manage_booking"),
@@ -81,6 +81,11 @@ urlpatterns = [
     path('add-service-item', views.add_service_item, name="add_service_item"),
     path('update-service-item', views.update_service_item, name="update_service_item"),
     path('delete-service-item', views.delete_service_item, name="delete_service_item"),
+
+    path('transactions-income', views.manage_income, name="manage_income"),
+    path('add-income', views.add_income, name="add_income"),
+    path('update-income', views.update_income, name="update_income"),
+    path('delete-income', views.delete_income, name="delete_income"),
 
 ]
 

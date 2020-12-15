@@ -34,7 +34,7 @@ def home(request):
 
     vendors = Vendors.objects.all().aggregate(Count('name')).get('name__count')
     bookings = Bookings.objects.all().aggregate(Count('id')).get('id__count')
-    vehicles = Vehicles.objects.all().aggregate(Count('make')).get('name__count')
+    vehicles = Vehicles.objects.all().aggregate(Count('make')).get('make__count')
 
 
     context = {
@@ -218,7 +218,29 @@ def delete_vehicle_group(request, id):
 
 @login_required(login_url='login')
 def manage_income(request):
+    form = IncomeForm()
+    data = Income.objects.all()
+    context = {
+        'form': form,
+        'data': data,
+    }
+    return render(request, 'transport/demo/pages/transactions/income.html', context)
+
+
+@login_required(login_url='login')
+def add_income(request):
     pass
+
+
+@login_required(login_url='login')
+def update_income(request):
+    pass
+
+
+@login_required(login_url='login')
+def delete_income(request):
+    pass
+
 
 @login_required(login_url='login')
 def manage_expense(request):

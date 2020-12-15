@@ -143,5 +143,21 @@ class ServiceItemForm(ModelForm):
         exclude = ('created_at','updated_at','deleted_at')
 
 
+class IncomeForm(ModelForm):
+    class Meta:
+        model = Income
+        fields = ('vehicle', 'income_type', 'amount', 'mileage',  'date')
+        widgets = {
+             'date': DateInput()
+        }
+
+        def __init__(self, *args, **kwargs):
+            super(IncomeForm, self).__init__(*args, **kwargs)
+            self.fields['vehicle'].empty_label = 'Select Vehicle'
+            self.fields['income_type'].empty_label = 'Select Income Type'
+
+            
+
+
         
     

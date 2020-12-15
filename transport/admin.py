@@ -58,11 +58,11 @@ class FuelAdmin(admin.ModelAdmin):
     list_display = ('fuel_from','province', 'cost_per_unit','vendor_name','note', 'qty', 'vehicle_id', 'user_id')
 
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ('income_user','amount','income_id','income_cat', 'user_id','mileage', 'date' ,'created_at')
+    list_display = ('income_user','amount','vehicle', 'income_type','mileage', 'date' ,'created_at')
 
 
 class IncomeCatAdmin(admin.ModelAdmin):
-    list_display = ('name','user_id','type', 'created_at')
+    list_display = ('name','incomecat_user','type', 'created_at')
 
 class VendorTypeAdmin(admin.ModelAdmin):
     list_display = ('type', )
