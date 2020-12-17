@@ -220,4 +220,4 @@ class FuelForm(ModelForm):
         super(FuelForm, self).__init__(*args, **kwargs)
         self.fields['vehicle'].empty_label = 'Select Vehicle'
         self.fields['vendor'].empty_label = 'Select Vendor'
-        self.fields['start_meter'].placeholder = 'Meter reading at time of fuel up'
+        self.fields['start_meter'].help_text = 'Meter reading at time of fuel up'
