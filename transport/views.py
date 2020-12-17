@@ -91,9 +91,11 @@ def login(request):
         if user is not None:
             auth_login(request, user)
             return redirect('home')
-        else: 
-            # messages.info(request, 'Username or Password is incorrect. Try again')
-            return redirect('login')
+        else:
+            message = "Incorrect Username or Password"
+            return render(request, 'transport\demo\pages\samples\login.html', {
+                'message': message, 
+                })            
     else:  
         return render(request, 'transport\demo\pages\samples\login.html')
 
@@ -229,30 +231,98 @@ def manage_income(request):
 
 @login_required(login_url='login')
 def add_income(request):
-    pass
+    if request.method == 'POST':
+        form = IncomeForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.income_user = request.user
+            instance.save()
+            return redirect('manage_income')
+        else:
+            return render(request, 'transport/demo/pages/transactions/income.html', {'form': form})
 
 
 @login_required(login_url='login')
-def update_income(request):
-    pass
-
-
-@login_required(login_url='login')
-def delete_income(request):
-    pass
+def delete_income(request, id):
+    income = Income.objects.get(pk=id)
+    income.delete()
+    return redirect('manage_income')
 
 
 @login_required(login_url='login')
 def manage_expense(request):
-    pass
+    form = ExpenseForm()
+    data = Expense.objects.all()
+    context = {
+        'form': form,
+        'data': data,
+    }
+    return render(request, 'transport/demo/pages/transactions/expense.html', context)
+
+
+@login_required(login_url='login')
+def add_expense(request):
+     if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.expense_user = request.user
+            instance.save()
+            return redirect('manage_expense')
+        else:
+            return render(request, 'transport/demo/pages/transactions/expense.html', {'form': form})
+
+
+@login_required(login_url='login')
+def delete_expense(request):
+    expense = Expense.objects.get(pk=id)
+    expense.delete()
+    return redirect('manage_expense')
+
 
 @login_required(login_url='login')
 def new_booking(request):
-    pass
+    if request.method == "GET":
+        form = BookingForm()
+        return render(request, 'transport/demo/pages/bookings/create-booking.html', {'form': form})
+    else:
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False) 
+            instance.status = "Not Completed"
+            instance.payment = 0.0
+            instance.save()
+            return redirect('manage_booking')
+        else:
+            return render(request, 'transport/demo/pages/bookings/create-booking.html', {'form': form})
 
 @login_required(login_url='login')
 def manage_booking(request):
-    pass
+    data = Bookings.objects.all()
+    return render(request, 'transport/demo/pages/bookings/index.html', {'data': data})
+
+
+@login_required(login_url='login')
+def edit_booking(request, id):
+    booking = Bookings.objects.get(pk=id)
+    if request.method == "GET":
+        form = BookingForm(instance=booking)
+        return render(request, 'transport/demo/pages/bookings/edit-booking.html', {'form': form})
+    else:
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_booking')
+        else:
+            return render(request, 'transport/demo/pages/bookings/edit-booking.html', {'form': form})
+
+
+@login_required(login_url='login')
+def delete_booking(request, id):
+    booking = Bookings.objects.get(pk=id)
+    booking.delete()
+    return redirect('manage_booking')
+
 
 @login_required(login_url='login')
 def booking_calendar(request):
@@ -304,8 +374,30 @@ def add_fuel(request):
 
 
 @login_required(login_url='login')
-def fuel_history(request):
+def update_fuel(request):
     pass
+
+
+@login_required(login_url='login')
+def delete_fuel(request):
+    pass
+
+
+@login_required(login_url='login')
+def fuel_history(request):
+    data = Fuel.objects.all()
+    cost_list = []
+    for da in data:
+        cost_list.append(da.qty * da.cost_per_unit)
+
+    my_cost = zip(data, cost_list)
+    context = {
+        'data' : data,
+        'cost_list' : cost_list,
+        'my_cost' : my_cost,
+    }
+
+    return render(request, "transport/demo/pages/fuel/index.html", context)
 
 @login_required(login_url='login')
 def add_vendor(request):

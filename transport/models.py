@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+import datetime
 from django.db.models import Q
 # from datetime import timedelta
 # from django.db.models.signals import post_save
@@ -110,75 +111,6 @@ class ApiSettings(models.Model):
         return self.key_name
 
 
-
-
-
-class BookingIncome(models.Model):
-    bookingincome_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookingincomes", null=True)
-    booking_id = models.IntegerField(blank=True, null=True)
-    income_id = models.IntegerField(blank=True, null=True)
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'booking_income'
-        verbose_name = "Booking Income"
-        
-
-    def __str__(self):
-        return str(self.bookingincome_user)
-
-
-class Bookings(models.Model):
-    bookings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookings", null=True)
-    customer_id = models.IntegerField(blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True)
-    vehicle_id = models.IntegerField(blank=True, null=True)
-    driver_id = models.IntegerField(blank=True, null=True)
-    pickup = models.DateTimeField(blank=True, null=True)
-    dropoff = models.DateTimeField(blank=True, null=True)
-    duration = models.IntegerField(blank=True, null=True)
-    pickup_addr = models.CharField(max_length=255, blank=True, null=True)
-    dest_addr = models.CharField(max_length=255, blank=True, null=True)
-    note = models.TextField(blank=True, null=True)
-    travellers = models.IntegerField()
-    status = models.IntegerField()
-    payment = models.IntegerField()
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'bookings'
-
-
-    def __str__(self):
-        return str(self.bookings_user)
-
-
-class BookingsMeta(models.Model):
-    bookingsmeta_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookingsmeta", null=True)
-    booking_id = models.PositiveIntegerField()
-    type = models.CharField(max_length=255)
-    key = models.CharField(max_length=255)
-    value = models.TextField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'bookings_meta'
-        verbose_name = "Bookings Meta"
-        verbose_name_plural = "Bookings Meta"
-
-    def __str__(self):
-        return self.key
-
-
 # class DjangoAdminLog(models.Model):
 #     action_time = models.DateTimeField()
 #     object_id = models.TextField(blank=True, null=True)
@@ -255,44 +187,6 @@ class EmailContent(models.Model):
         return self.key
 
 
-class Expense(models.Model):
-    expense_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expenses", null=True)
-    vehicle_id = models.IntegerField(blank=True, null=True)
-    exp_id = models.IntegerField(blank=True, null=True)
-    amount = models.FloatField()
-    user_id = models.IntegerField(blank=True, null=True)
-    expense_type = models.IntegerField(blank=True, null=True)
-    comment = models.TextField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'expense'
-
-    def __str__(self):
-        return self.comment
-
-
-class ExpenseCat(models.Model):
-    expensecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expensecats", null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=5, blank=True, null=True)
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'expense_cat'
-
-    def __str__(self):
-        return self.type
-
-
 class FareSettings(models.Model):
     # faresettings_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="faresettings", null=True)
     key_name = models.CharField(max_length=255, blank=True, null=True)
@@ -311,34 +205,6 @@ class FareSettings(models.Model):
     def __str__(self):
         return self.key_name
 
-
-class Fuel(models.Model):
-    fuel_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="fuels", null=True)
-    vehicle_id = models.IntegerField(blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True)
-    start_meter = models.CharField(max_length=255, blank=True, null=True)
-    end_meter = models.CharField(max_length=255, blank=True, null=True)
-    reference = models.CharField(max_length=255, blank=True, null=True)
-    province = models.CharField(max_length=255, blank=True, null=True)
-    note = models.TextField(blank=True, null=True)
-    vendor_name = models.CharField(max_length=255, blank=True, null=True)
-    qty = models.IntegerField(blank=True, null=True)
-    fuel_from = models.CharField(max_length=255, blank=True, null=True)
-    cost_per_unit = models.CharField(max_length=255, blank=True, null=True)
-    consumption = models.IntegerField(blank=True, null=True)
-    complete = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
-    updated_at = models.DateField(blank=True, null=True)
-    deleted_at = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'fuel'
-
-
-    def __str__(self):
-        return str (self.reference)
 
 
 class Maintanance(models.Model):
@@ -767,3 +633,142 @@ class Income(models.Model):
 
     def __str__(self):
         return str (self.income_user)
+
+
+class ExpenseCat(models.Model):
+    expensecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expensecats", null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    user_id = models.IntegerField(blank=True, null=True)
+    type = models.CharField(max_length=5, blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(auto_now = True, blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'expense_cat'
+
+    def __str__(self):
+        return self.name
+
+
+
+class Expense(models.Model):
+    expense_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_expense", null=True)
+    vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicle_expense", null=True)
+    exp_id = models.IntegerField(blank=True, null=True)
+    amount = models.FloatField()
+    expense_type = models.ForeignKey(ExpenseCat, on_delete=models.CASCADE, related_name="expense_type", null=True)
+    comment = models.CharField(max_length=500, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'expense'
+
+    def __str__(self):
+        return self.comment
+
+
+class BookingIncome(models.Model):
+    bookingincome_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookingincomes", null=True)
+    booking_id = models.IntegerField(blank=True, null=True)
+    income_id = models.IntegerField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'booking_income'
+        verbose_name = "Booking Income"
+        
+
+    def __str__(self):
+        return str(self.bookingincome_user)
+
+
+
+STATUSCHOICES =(
+    ('Not Completed','Not Completed'),
+    ('Completed','Completed'),
+)
+
+class Bookings(models.Model):
+    customer = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="bookings", null=True)
+    # user_id = models.IntegerField(blank=True, null=True)
+    vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicle_booking", null=True)
+    driver = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="driver_booking", null=True)
+    pickup = models.DateTimeField(blank=True, null=True)
+    dropoff = models.DateTimeField(blank=True, null=True)
+    duration = models.IntegerField(blank=True, null=True)
+    pickup_addr = models.TextField(blank=True, null=True)
+    dest_addr =models.TextField(blank=True, null=True)
+    note = models.TextField(blank=True, null=True)
+    travellers = models.IntegerField(default=1, blank=True, null=True)
+    status = models.CharField(choices=STATUSCHOICES, default='Not Completed', max_length=15, blank=True, null=True)
+    payment = models.FloatField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(auto_now = True, blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'bookings'
+
+
+    def __str__(self):
+        return str(self.customer)
+
+
+class BookingsMeta(models.Model):
+    bookingsmeta_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookingsmeta", null=True)
+    booking_id = models.PositiveIntegerField()
+    type = models.CharField(max_length=255)
+    key = models.CharField(max_length=255)
+    value = models.TextField(blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'bookings_meta'
+        verbose_name = "Bookings Meta"
+        verbose_name_plural = "Bookings Meta"
+
+    def __str__(self):
+        return self.key
+
+
+
+class Fuel(models.Model):
+    # fuel_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="fuels", null=True)
+    vehicle = models.ForeignKey(Vehicles, on_delete=models.CASCADE, related_name="vehicle_fuel", null=True)
+    # user_id = models.IntegerField(blank=True, null=True)
+    start_meter = models.CharField(max_length=255, blank=True, null=True)
+    end_meter = models.CharField(max_length=255, blank=True, null=True)
+    reference = models.CharField(max_length=255, blank=True, null=True)
+    province = models.CharField(max_length=255, blank=True, null=True)
+    note = models.CharField(max_length=255, blank=True, null=True)
+    vendor = models.ForeignKey(Vendors, on_delete=models.CASCADE, related_name="fuel_vendor", null=True)
+    qty = models.IntegerField(blank=True, null=True)
+    fuel_from = models.CharField(max_length=255, blank=True, null=True)
+    cost_per_unit = models.FloatField(blank=True, null=True)
+    consumption = models.IntegerField(blank=True, null=True)
+    complete = models.BooleanField(blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add = True, null=True, blank=True)
+    updated_at = models.DateField(auto_now = True, blank=True, null=True)
+    deleted_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'fuel'
+
+
+    def __str__(self):
+        return str (self.vehicle)

@@ -33,7 +33,7 @@ class BookingIncomeAdmin(admin.ModelAdmin):
     list_display = ('bookingincome_user','booking_id', 'income_id', 'created_at')
 
 class BookingsAdmin(admin.ModelAdmin):
-    list_display = ('bookings_user','created_at', 'dest_addr', 'pickup_addr', 'note', 'duration', 'status', 'travellers', 'user_id')
+    list_display = ('customer', 'driver', 'vehicle', 'dest_addr', 'pickup_addr', 'note', 'duration', 'status', 'travellers')
 
 class BookingsMetaAdmin(admin.ModelAdmin):
     list_display = ('key', 'value', 'type', 'booking_id')
@@ -46,7 +46,7 @@ class EmailContentAdmin(admin.ModelAdmin):
     list_display = ('key', 'value','created_at', 'updated_at')
 
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ('comment','expense_type', 'user_id','exp_id', 'date' ,'created_at')
+    list_display = ('comment','expense_type', 'expense_user','exp_id', 'date' ,'created_at')
 
 class ExpenseCatAdmin(admin.ModelAdmin):
     list_display = ('name','user_id','type','created_at')
@@ -55,7 +55,7 @@ class FareSettingsAdmin(admin.ModelAdmin):
     list_display = ('key_name','key_value','created_at')
 
 class FuelAdmin(admin.ModelAdmin):
-    list_display = ('fuel_from','province', 'cost_per_unit','vendor_name','note', 'qty', 'vehicle_id', 'user_id')
+    list_display = ('fuel_from','province', 'cost_per_unit','vendor','note', 'qty', 'vehicle', 'start_meter','end_meter','reference')
 
 class IncomeAdmin(admin.ModelAdmin):
     list_display = ('income_user','amount','vehicle', 'income_type','mileage', 'date' ,'created_at')

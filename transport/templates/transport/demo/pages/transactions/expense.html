@@ -34,7 +34,7 @@ right: 0;
             </div>
             {% endif %}
         
-        <form method="POST" action="{% url 'add_income' %}" class="mt-5 ml-2 mb-5" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'add_expense' %}" class="mt-5 ml-2 mb-5" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="container">
@@ -43,7 +43,7 @@ right: 0;
                         {{ form.vehicle | as_crispy_field }}
                     </div>
                     <div class="col-6">
-                        {{ form.income_type | as_crispy_field }}
+                        {{ form.expense_type | as_crispy_field }}
                     </div>
                 </div>
                 <div class="row">
@@ -51,7 +51,7 @@ right: 0;
                         {{ form.amount | as_crispy_field }}
                     </div>
                     <div class="col-6">
-                        {{ form.mileage | as_crispy_field }}
+                        {{ form.comment | as_crispy_field }}
                     </div>
                 </div>
 
@@ -84,10 +84,10 @@ right: 0;
           <th class="text-left align-middle table-font-change">Vehicle Maker</th>
           <th class="text-left align-middle table-font-change">Vehicle Model</th>
           <th class="text-left align-middle table-font-change">License Plate</th>
-          <th class="text-left align-middle table-font-change">Income Type</th>
+          <th class="text-left align-middle table-font-change">Expense Type</th>
           <th class="text-left align-middle table-font-change">Date</th>
           <th class="text-left align-middle table-font-change">Amount</th>
-          <th class="text-left align-middle table-font-change">Mileage</th>
+          <th class="text-left align-middle table-font-change">Comment</th>
           <th class="text-left align-middle table-font-change">Delete</th>
         </tr>
       </thead>
@@ -98,13 +98,13 @@ right: 0;
           <td class="text-left align-middle table-font-change">{{ row.vehicle.make }}</td>
           <td class="text-left align-middle table-font-change">{{ row.vehicle.model }}</td>
           <td class="text-left align-middle table-font-change">{{ row.vehicle.license_plate }}</td>
-          <td class="text-left align-middle table-font-change">{{ row.income_type}}</td>
+          <td class="text-left align-middle table-font-change">{{ row.expense_type}}</td>
           <td class="text-left align-middle table-font-change">{{ row.date|date:"D, d M, Y"}}</td>
           <td class="text-left align-middle table-font-change">{{ row.amount }}</td>
-          <td class="text-left align-middle table-font-change">{{ row.mileage }}</td>
+          <td class="text-left align-middle table-font-change">{{ row.comment }}</td>
          
           <td class="text-left align-middle table-font-change">
-                <a href="{% url 'delete_income' row.id %}"><i class="fa fa-trash" aria-hidden="true" style="color: red; margin-right:5px;"></i></a>
+                <a href="{% url 'delete_expense' row.id %}"><i class="fa fa-trash" aria-hidden="true" style="color: red; margin-right:5px;"></i></a>
           </td>
         </tr>
         {% endfor %}

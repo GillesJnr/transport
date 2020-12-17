@@ -15,11 +15,8 @@ urlpatterns = [
     path('drivers', views.view_drivers, name="view_drivers"),
     path('vehicles', views.manage_vehicles, name="manage_vehicles"),
     path('vehicles-group', views.vehicles_group, name="vehicles_group"),    
-    
-    path('transactions-expense', views.manage_expense, name="manage_expense"),
-    path('newbooking', views.new_booking, name="new_booking"),
-    path('managebooking', views.manage_booking, name="manage_booking"),
-    path('bookingcalendar', views.booking_calendar, name="booking_calendar"),
+
+
     path('delinquent-report', views.delinquent_report, name="delinquent_report"),
     path('monthly-report', views.monthly_report, name="monthly_report"),
     path('booking-report', views.booking_report, name="booking_report"),
@@ -29,8 +26,8 @@ urlpatterns = [
     path('customer-report', views.customer_report, name="customer_report"),
     path('vendor-report', views.vendor_report, name='vendor_report'),
     path('yearly-report', views.yearly_report, name='yearly_report'),
-    path('addfuel', views.add_fuel, name="add_fuel"),
-    path('fuelhistory', views.fuel_history, name='fuel_history'),
+
+
     path('addvendor', views.add_vendor, name='add_vendor'),
     path('manage-vendors', views.manage_vendor, name='manage_vendor'),
     path('add-workorder', views.add_workorder, name="add_workorder"),
@@ -84,8 +81,25 @@ urlpatterns = [
 
     path('transactions-income', views.manage_income, name="manage_income"),
     path('add-income', views.add_income, name="add_income"),
-    path('update-income', views.update_income, name="update_income"),
-    path('delete-income', views.delete_income, name="delete_income"),
+    path('delete-income/<int:id>', views.delete_income, name="delete_income"),
+
+    path('transactions-expense', views.manage_expense, name="manage_expense"),
+    path('add-expense', views.add_expense, name="add_expense"),
+    path('delete-expense/<int:id>', views.delete_expense, name="delete_expense"),
+
+
+ # Booking Feature URLS
+    path('newbooking', views.new_booking, name="new_booking"),
+    path('edit-booking/<int:id>', views.edit_booking, name="edit_booking"),
+    path('delete-booking/<int:id>', views.delete_booking, name="delete_booking"),
+    path('managebooking', views.manage_booking, name="manage_booking"),
+    path('bookingcalendar', views.booking_calendar, name="booking_calendar"),
+
+# Fuel Feature URLS
+    path('addfuel', views.add_fuel, name="add_fuel"),
+    path('fuelhistory', views.fuel_history, name='fuel_history'),
+    path('update-fuel/<int:id>', views.update_fuel, name='update_fuel'),
+    path('delete-fuel/<int:id>', views.delete_fuel, name='delete_fuel'),
 
 ]
 

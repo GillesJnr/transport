@@ -41,6 +41,18 @@ class AddUsersForm(forms.ModelForm):
 class DateInput(forms.DateInput):
     input_type = 'date'
     
+    def __init__(self, **kwargs):
+        kwargs["format"] = "%Y-%m-%d"
+        super().__init__(**kwargs)
+
+
+class DateTimeInput(forms.DateTimeInput):
+    input_type = 'datetime-local'
+
+    def __init__(self, **kwargs):
+        kwargs["format"] = "%Y-%m-%dT%H:%M"
+        super().__init__(**kwargs)
+
 
 class VehicleForm(ModelForm):
     class Meta:
@@ -151,13 +163,61 @@ class IncomeForm(ModelForm):
              'date': DateInput()
         }
 
-        def __init__(self, *args, **kwargs):
-            super(IncomeForm, self).__init__(*args, **kwargs)
-            self.fields['vehicle'].empty_label = 'Select Vehicle'
-            self.fields['income_type'].empty_label = 'Select Income Type'
+    def __init__(self, *args, **kwargs):
+        super(IncomeForm, self).__init__(*args, **kwargs)
+        self.fields['vehicle'].empty_label = 'Select Vehicle'
+        self.fields['income_type'].empty_label = 'Select Income Type'
 
             
 
+class ExpenseForm(ModelForm):
+    class Meta: 
+        model = Expense
+        fields = ('vehicle','expense_type','amount','comment','date')
+        widgets = {
+            'date': DateInput()
+        }
+        
+    def __init__(self, *args, **kwargs):
+        super(ExpenseForm, self).__init__(*args, **kwargs)
+        self.fields['vehicle'].empty_label = 'Select Vehicle'
+        self.fields['expense_type'].empty_label = 'Select Expense Type'
+
+
+class BookingForm(ModelForm):
+    class Meta:
+        model = Bookings
+        fields = ('customer','vehicle','driver','pickup','dropoff','pickup_addr','dest_addr','note', 'travellers')
+        widgets = {
+            'pickup' : DateTimeInput(),
+            'dropoff' : DateTimeInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(BookingForm, self).__init__(*args, **kwargs)
+        self.fields['customer'].empty_label = 'Select Customer'
+        self.fields['vehicle'].empty_label = 'Select Vehicle'
+        self.fields['driver'].empty_label = 'Select Driver'
+        self.fields['customer'].queryset = Users.objects.all().filter(user_type='C')
+        self.fields['driver'].queryset = Users.objects.all().filter(user_type='D')
+        self.fields['pickup_addr'].label = "Pick Up Address"
+        self.fields['dest_addr'].label = "Destination Address"
+        self.fields['pickup'].input_formats = ["%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M"]
+        self.fields['dropoff'].input_formats = ["%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M"]
 
         
-    
+
+class FuelForm(ModelForm):
+    class Meta:
+        model = Fuel
+        fields = "__all__"
+        exclude = ('created_at','updated_at','deleted_at', 'fuel_from')
+        widgets = {
+            'date' : DateInput()
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(FuelForm, self).__init__(*args, **kwargs)
+        self.fields['vehicle'].empty_label = 'Select Vehicle'
+        self.fields['vendor'].empty_label = 'Select Vendor'
+        self.fields['start_meter'].placeholder = 'Meter reading at time of fuel up'
