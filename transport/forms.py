@@ -211,7 +211,7 @@ class FuelForm(ModelForm):
     class Meta:
         model = Fuel
         fields = "__all__"
-        exclude = ('created_at','updated_at','deleted_at', 'fuel_from')
+        exclude = ('created_at','updated_at','deleted_at')
         widgets = {
             'date' : DateInput()
         }
@@ -221,3 +221,37 @@ class FuelForm(ModelForm):
         self.fields['vehicle'].empty_label = 'Select Vehicle'
         self.fields['vendor'].empty_label = 'Select Vendor'
         self.fields['start_meter'].help_text = 'Meter reading at time of fuel up'
+        self.fields['qty'].label = 'Qty (Gal/Litre)'
+        self.fields['cost_per_unit'].label = 'Cost/Unit'
+
+
+class IncomeCatForm(ModelForm):
+    class Meta:
+        model = IncomeCat
+        fields = ('type',)
+        
+    def __init__(self, *args, **kwargs):
+        super(IncomeCatForm, self).__init__(*args, **kwargs)
+        self.fields['type'].label = "Income Type"
+
+
+
+class ExpenseCatForm(ModelForm):
+    class Meta:
+        model = ExpenseCat
+        fields = ('type',)
+        
+    def __init__(self, *args, **kwargs):
+        super(ExpenseCatForm, self).__init__(*args, **kwargs)
+        self.fields['type'].label = "Expense Type"
+
+
+
+class ReasonForm(ModelForm):
+    class Meta:
+        model = Reasons
+        fields = ('reason',)
+
+    def __init__(self, *args, **kwargs):
+        super(ReasonForm, self).__init__(*args, **kwargs)
+        self.fields['reason'].label = "Add Reason"

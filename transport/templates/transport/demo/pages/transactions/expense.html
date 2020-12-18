@@ -15,7 +15,7 @@ right: 0;
     <div class="col-12 col-md-12">
       <div class="box box-primary">
             <div class="box-header with-border container">
-                <h3 style="float:left" class="box-title float-left">Add Vehicle</h3>
+                <h3 style="float:left" class="box-title float-left">Add Record</h3>
               </div>
     </div>
   </div>
@@ -67,7 +67,7 @@ right: 0;
 
       <div class="box box-primary">
             <div class="box-header with-border container">
-                <h3 style="float:left" class="box-title float-left">Income</h3>
+                <h3 style="float:left" class="box-title float-left">Expenses</h3>
               </div>
     </div>
 
@@ -95,13 +95,13 @@ right: 0;
       <tbody>
         {% for row in data %}
         <tr>
-          <td class="text-left align-middle table-font-change">{{ row.vehicle.make }}</td>
-          <td class="text-left align-middle table-font-change">{{ row.vehicle.model }}</td>
-          <td class="text-left align-middle table-font-change">{{ row.vehicle.license_plate }}</td>
-          <td class="text-left align-middle table-font-change">{{ row.expense_type}}</td>
-          <td class="text-left align-middle table-font-change">{{ row.date|date:"D, d M, Y"}}</td>
-          <td class="text-left align-middle table-font-change">{{ row.amount }}</td>
-          <td class="text-left align-middle table-font-change">{{ row.comment }}</td>
+          <td class="text-left align-middle">{{ row.vehicle.make }}</td>
+          <td class="text-left align-middle">{{ row.vehicle.model }}</td>
+          <td class="text-left align-middle">{{ row.vehicle.license_plate }}</td>
+          <td class="text-left align-middle">{{ row.expense_type}}</td>
+          <td class="text-left align-middle">{{ row.date|date:"D, d M, Y"}}</td>
+          <td class="text-left align-middle">{{ row.amount }}</td>
+          <td class="text-left align-middle">{{ row.comment }}</td>
          
           <td class="text-left align-middle table-font-change">
                 <a href="{% url 'delete_expense' row.id %}"><i class="fa fa-trash" aria-hidden="true" style="color: red; margin-right:5px;"></i></a>

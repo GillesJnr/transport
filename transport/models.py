@@ -298,7 +298,7 @@ class PasswordResets(models.Model):
 
 
 class Reasons(models.Model):
-    reasons_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reasons", null=True)
+    # reasons_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reasons", null=True)
     reason = models.TextField(blank=True, null=True)
     deleted_at = models.DateField(blank=True, null=True)
     created_at = models.DateField(auto_now_add = True, null=True, blank=True)
@@ -596,10 +596,10 @@ class ServiceReminder(models.Model):
     
 
 class IncomeCat(models.Model):
-    incomecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomecats", null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
+    # incomecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incomecats", null=True)
+    # name = models.CharField(max_length=100, blank=True, null=True)
     # user_id = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=5, blank=True, null=True)
+    type = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateField(auto_now_add = True, null=True, blank=True)
     updated_at = models.DateField(auto_now = True, blank=True, null=True)
     deleted_at = models.DateField(blank=True, null=True)
@@ -610,7 +610,7 @@ class IncomeCat(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.type
 
 
 class Income(models.Model):
@@ -636,10 +636,10 @@ class Income(models.Model):
 
 
 class ExpenseCat(models.Model):
-    expensecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expensecats", null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=5, blank=True, null=True)
+    # expensecat_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expensecats", null=True)
+    # name = models.CharField(max_length=100, blank=True, null=True)
+    # user_id = models.IntegerField(blank=True, null=True)
+    type = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateField(auto_now_add = True, null=True, blank=True)
     updated_at = models.DateField(auto_now = True, blank=True, null=True)
     deleted_at = models.DateField(blank=True, null=True)
@@ -649,7 +649,7 @@ class ExpenseCat(models.Model):
         db_table = 'expense_cat'
 
     def __str__(self):
-        return self.name
+        return self.type
 
 
 

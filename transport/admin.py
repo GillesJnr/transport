@@ -49,7 +49,7 @@ class ExpenseAdmin(admin.ModelAdmin):
     list_display = ('comment','expense_type', 'expense_user','exp_id', 'date' ,'created_at')
 
 class ExpenseCatAdmin(admin.ModelAdmin):
-    list_display = ('name','user_id','type','created_at')
+    list_display = ('type','created_at')
 
 class FareSettingsAdmin(admin.ModelAdmin):
     list_display = ('key_name','key_value','created_at')
@@ -62,7 +62,7 @@ class IncomeAdmin(admin.ModelAdmin):
 
 
 class IncomeCatAdmin(admin.ModelAdmin):
-    list_display = ('name','incomecat_user','type', 'created_at')
+    list_display = ('type', 'created_at')
 
 class VendorTypeAdmin(admin.ModelAdmin):
     list_display = ('type', )

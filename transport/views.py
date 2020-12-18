@@ -370,17 +370,48 @@ def yearly_report(request):
 
 @login_required(login_url='login')
 def add_fuel(request):
-    pass
+    if request.method == "GET":
+        form = FuelForm()
+        vendors = Vendors.objects.all()
+        context = {
+            'form' : form,
+            'vendors' : vendors,
+        }
+        return render(request, 'transport/demo/pages/fuel/add-fuel.html', context)
+    else:
+        form = FuelForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            return redirect('fuel_history')
+        else:
+            return render(request, 'transport/demo/pages/fuel/add-fuel.html', context)
 
 
 @login_required(login_url='login')
-def update_fuel(request):
-    pass
+def update_fuel(request, id):
+    fuel = Fuel.objects.get(pk=id)
+    if request.method == "GET":
+        form = FuelForm(instance=fuel)
+        vendors = Vendors.objects.all()
+        context = {
+            'form' : form,
+            'vendors' : vendors,
+        }
+        return render(request, 'transport/demo/pages/fuel/update-fuel.html', context)
+    else:
+        form = FuelForm(request.POST, instance=fuel)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            return redirect('fuel_history')
+        else:
+            return render(request, 'transport/demo/pages/fuel/add-fuel.html', context)
 
 
 @login_required(login_url='login')
-def delete_fuel(request):
-    pass
+def delete_fuel(request, id):
+    fuel = Fuel.objects.get(pk=id)
+    fuel.delete()
+    return redirect('fuel_history')
 
 
 @login_required(login_url='login')
@@ -634,9 +665,49 @@ def general_settings(request):
 def api_settings(request):
     pass
 
+
+
 @login_required(login_url='login')
 def cancellation_reason(request):
-    pass
+    data = Reasons.objects.all()
+    return render(request, "transport/demo/pages/settings/cancellation-reasons.html", {'data': data})
+
+
+@login_required(login_url='login')
+def add_cancellation_reason(request):
+    if request.method == "GET":
+        form = ReasonForm()
+        return render(request, "transport/demo/pages/settings/add-cancellation-reason.html", {'form': form})
+    else:
+        form = ReasonForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cancellation_reason')
+        else:
+            return render(request, "transport/demo/pages/settings/add-cancellation-reason.html", {'form': form})
+
+
+@login_required(login_url='login')
+def update_cancellation_reason(request, id):
+    reason = Reasons.objects.get(pk=id)
+    if request.method == "GET":
+        form = ReasonForm(instance=reason)
+        return render(request, "transport/demo/pages/settings/update-cancellation-reason.html", {'form': form})
+    else:
+        form = ReasonForm(request.POST, instance=reason)
+        if form.is_valid():
+            form.save()
+            return redirect('cancellation_reason')
+        else:
+            return render(request, "transport/demo/pages/settings/update-cancellation-reason.html", {'form': form})
+
+
+@login_required(login_url='login')
+def delete_cancellation_reason(request, id):
+    reason = Reasons.objects.get(pk=id)
+    reason.delete()
+    return redirect('cancellation_reason')
+
 
 @login_required(login_url='login')
 def email_notification(request):
@@ -653,10 +724,87 @@ def fare_settings(request):
 
 
 @login_required(login_url='login')
-def expense_categories(request):
-    pass
+def expense_type(request):
+    data = ExpenseCat.objects.all()
+    return render(request, "transport/demo/pages/settings/expense-type.html" , {'data': data})
+
 
 @login_required(login_url='login')
-def income_categories(request):
-    pass
+def add_expense_type(request):
+    if request.method == "GET":
+        form = ExpenseCatForm()
+        return render(request, "transport/demo/pages/settings/add-expense-type.html" , {'form': form} )
+    else:
+        form = ExpenseCatForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('expense_type')
+        else:
+            return render(request, "transport/demo/pages/settings/add-expense-type.html" , {'form': form} )
 
+ 
+@login_required(login_url='login')
+def update_expense_type(request, id):
+    expense_type = ExpenseCat.objects.get(pk=id)
+    if request.method == "GET":
+        form = ExpenseCatForm(instance=expense_type)
+        return render(request, "transport/demo/pages/settings/update-expense-type.html" , {'form': form})
+    else:
+        form = ExpenseCatForm(request.POST, instance=expense_type)
+        if form.is_valid():
+            form.save()
+            return redirect('expense_type')
+        else:
+            return render(request, "transport/demo/pages/settings/update-expense-type.html" , {'form': form} )
+
+
+@login_required(login_url='login')
+def delete_expense_type(request, id):
+    expense_type = ExpenseCat.objects.get(pk=id)
+    expense_type.delete()
+    return redirect('expense_type')
+
+
+
+
+
+@login_required(login_url='login')
+def income_type(request):
+    data = IncomeCat.objects.all()
+    return render(request, "transport/demo/pages/settings/income-type.html" , {'data': data})
+
+
+@login_required(login_url='login')
+def add_income_type(request):
+    if request.method == "GET":
+        form = IncomeCatForm()
+        return render(request, "transport/demo/pages/settings/add-income-type.html" , {'form': form} )
+    else:
+        form = IncomeCatForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('income_type')
+        else:
+            return render(request, "transport/demo/pages/settings/add-income-type.html" , {'form': form} )
+
+ 
+@login_required(login_url='login')
+def update_income_type(request, id):
+    income_type = IncomeCat.objects.get(pk=id)
+    if request.method == "GET":
+        form = IncomeCatForm(instance=income_type)
+        return render(request, "transport/demo/pages/settings/update-income-type.html" , {'form': form})
+    else:
+        form = IncomeCatForm(request.POST, instance=income_type)
+        if form.is_valid():
+            form.save()
+            return redirect('income_type')
+        else:
+            return render(request, "transport/demo/pages/settings/update-income-type.html" , {'form': form} )
+
+
+@login_required(login_url='login')
+def delete_income_type(request, id):
+    income_type = IncomeCat.objects.get(pk=id)
+    income_type.delete()
+    return redirect('income_type')

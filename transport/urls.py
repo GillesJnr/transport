@@ -36,12 +36,29 @@ urlpatterns = [
     path('manage-notes', views.manage_note, name="manage_note"),
     path('settings-general', views.general_settings, name="general_settings"),
     path('settings-api', views.api_settings, name="api_settings"),
+    
+    
     path('settings-reason', views.cancellation_reason, name="cancellation_reason"),
+    path('add-cancellation-reason', views.add_cancellation_reason, name="add_cancellation_reason"),
+    path('update-cancellation-reason/<int:id>', views.update_cancellation_reason, name="update_cancellation_reason"),
+    path('delete-cancellation-reason/<int:id>', views.delete_cancellation_reason, name="delete_cancellation_reason"),
+
+
+
     path('settings-email-notification', views.email_notification, name="email_notification"),
     path('settings-email-content', views.email_content, name="email_content"),
     path('settings-fare', views.fare_settings, name="fare_settings"),
-    path('settings-expense', views.expense_categories, name='expense_categories'),
-    path('settings-income', views.income_categories, name="income_categories"), 
+
+    path('settings-expense', views.expense_type, name='expense_type'),
+    path('add-expense-settings', views.add_expense_type, name='add_expense_type'),
+    path('update-expense-settings/<int:id>', views.update_expense_type, name='update_expense_type'),
+    path('delete-expense-settings/<int:id>', views.delete_expense_type, name='delete_expense_type'),
+
+
+    path('settings-income', views.income_type, name='income_type'),
+    path('add-income-settings', views.add_income_type, name='add_income_type'),
+    path('update-income-settings/<int:id>', views.update_income_type, name='update_income_type'),
+    path('delete-income-settings/<int:id>', views.delete_income_type, name='delete_income_type'),
 
     path('add-vehicle', views.add_vehicle , name="add_vehicle"),
     path('edit-vehicle/<int:id>', views.edit_vehicle , name="edit_vehicle"),
