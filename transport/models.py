@@ -632,7 +632,7 @@ class Income(models.Model):
 
 
     def __str__(self):
-        return str (self.income_user)
+        return str (self.vehicle)
 
 
 class ExpenseCat(models.Model):

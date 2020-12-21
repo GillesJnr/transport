@@ -1,0 +1,63 @@
+{% extends 'transport/demo/layout.html' %}
+{% load crispy_forms_tags %}
+{% block customcss %}
+<style type="text/css">
+.custom{
+min-width: 50px;
+left:-149px !important;
+right: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="row mdc-layout-grid__cell">
+        <div class="col-12 col-md-12">
+          <div class="box box-primary">
+                <div class="box-header with-border container">
+                    <h3 style="float:left" class="box-title float-left">Edit Income Type</h3>
+                  </div>
+        </div>
+      </div>
+       
+
+  <div class="col-12 col-md-12">
+        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12" style="margin-left:30px;">
+            <div class="mdc-card p-0">
+                {% if message in messages %}
+                <div class="alert alert-danger">
+                <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                </div>
+                {% endif %}
+            
+                <form method="POST" class="mt-5 ml-2 mb-5" enctype="multipart/form-data">
+                    {% csrf_token %}
+    
+                    <div class="container">
+                      <div class="row">
+                            <div class="col-6">
+                                {{ form.type | as_crispy_field }}
+                            </div>
+                        
+                        </div>
+                        
+    
+                        
+                            <input type="submit" class="btn btn-primary" value="Update">
+                        
+    
+                    </div>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
